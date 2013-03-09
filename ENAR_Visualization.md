@@ -276,7 +276,9 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 
 <img src="Fiddler.gif" alt="Fiddler" height="200" width="200">
 
-  <span class="footnote"> Image from http://tvtropes.org/pmwiki/pmwiki.php/Theatre/FiddlerOnTheRoof?from=Main.FiddlerOnTheRoof</span>
+<hr noshade size=1> Image from http://tvtropes.org/pmwiki/pmwiki.php/Theatre/FiddlerOnTheRoof?from=Main.FiddlerOnTheRoof</hr>
+
+
  
 
 ---
@@ -311,12 +313,13 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 * Ciprian Craniceanu and Brian Caffo - SMART Group
 * Dan Hanley - MISTIE Trial
 * Elizabeth Sweeney 
-* Duncan Murdoch - otherwise I'd still be presenting distorted brains
+* Duncan Murdoch - for rgl and exporting: otherwise I'd still be presenting distorted brains
 * Those who created the tools I use without even thinking
 
 ---
 
 ## Biblio
+<span style="font-size:15px;">
 <p>Stein J, Jewison N, Topol, Crane N, Frey L, Picon M, Mann P, Morris O, Harnick S, Williams J and others (1964).
 <EM>Fiddler on the Roof</EM>.
 Crown.
@@ -358,6 +361,7 @@ R package version 0.3.3, <a href="http://ramnathv.github.com/slidify/">http://ra
 Using Multisequence Longitudinal MRI.&rdquo;
 <EM>American Journal of Neuroradiology</EM>.
 
+</span>
 ---
 
 
