@@ -1,10 +1,10 @@
 ---
 title       : Visualizing Brain Imaging in Interactive 3D
-subtitle    : John Muschelli (ENAR 2013)
+subtitle    : John Muschelli  (ENAR 2013)
 author      : "@StrictlyStat (github: muschellij2)" 
 job         : Johns Hopkins Bloomberg School of Public Health
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
-highlighter : prettify  # {highlight.js, prettify, highlight}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : hemisu-dark      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
@@ -73,9 +73,54 @@ mode        : selfcontained # {standalone, draft}
 
 ---
 
+## Why should I care/do imaging?
+
+* Non-invasive (think <span class="black">craniotomy</span>)
+* Potential biomarkers - early identification
+  * Lesions in MS
+  * Plaques in Alzheimer's
+  * White matter volume
+  * Cortical thickness
+
+* Outcome measures
+  * Stroke - amount of blood
+  * Brain activity
+
+---
+
+
+## Neuroimaging Data 
+What kind of data do we have?
+* <span class = "green"><b>Structural MRIs</b></span>
+* Functional MRIs
+* Computed Tomography - <span class = "green"><b>CT</b></span>
+* Diffusion Tensor Imaging (DTI)
+* Electroencephalography (EEG)
+* Positron Emission Tomography (PET)
+* etc. 
+
+<span class="black"><b>Visualization</b></span> and <span class="black"><b>presentation</b></span> of these data can be <span class="black"><b>improved</b></span> with the use of 3D tools.
+
+---
+
+
+
+## 3D rendering tools out there
+
+* <span class = 'green'>RGL</span> (R Graphics Library) [Adler & Murdoch, 2013] using `R` - http://cran.r-project.org/
+* <span class = 'green'>3D Slicer</span> - http://www.slicer.org/
+* Paraview - http://www.paraview.org/
+* Freesurfer - http://surfer.nmr.mgh.harvard.edu/
+* AFNI - http://afni.nimh.nih.gov/afni
+* MIPAV - http://mipav.cit.nih.gov/
+* Matlab
+* Many more
+
+---
+
 ## Overall Message
 
-* 3D figures can be created/<span class="red"><b>exported easily</b></span>
+* 3D (<span class="red"><b>neuroimaging</b></span>)  figures can be created/<span class="red"><b>exported easily</b></span>
  
 * <span class="red"><b>Standalone</b></span> objects are needed for end-users/readers
  
@@ -83,41 +128,13 @@ mode        : selfcontained # {standalone, draft}
  
 * We need to figure how to effectively incorporate into pipelines/<span class="red"><b>publications</b></span>
 
-* Focus will be on neuroimaging 
-
----
-
-## Neuroimaging Data 
-What kind of data do we have?
-* <span class = "green">Structural MRIs</span>
-* Functional MRIs
-* Computed Tomography - <span class = "green">CT</span>
-* Diffusion Tensor Imaging (DTI)
-* Electroencephalography (EEG)
-* Positron Emission Tomography (PET)
-* etc. 
-
-Visualization and presentation of these data can be <b>improved</b> with the use of 3D tools.
-
----
-
-
-## 3D rendering tools out there
-
-* <span class = 'green'>3D Slicer</span> - http://www.slicer.org/
-* Paraview - http://www.paraview.org/
-* <span class = 'green'>RGL</span> (R Graphics Library) [Adler & Murdoch, 2013] using `R` - http://cran.r-project.org/
-* Freesurfer - http://surfer.nmr.mgh.harvard.edu/
-* AFNI - http://afni.nimh.nih.gov/afni
-* MIPAV - http://mipav.cit.nih.gov/
-* Matlab, etc.
 
 ---
 
 
 ## Current methods of visualizing/EDA
 
-* Time series of individual voxels/regions of interest (ROI) <b>Keep 2D</b>
+* Time series of individual voxels/regions of interest (ROI) <span class="black"><b>Keep 2D</b></span>
 * Look at data cross-sectionally ("Lightbox")
 
 
@@ -174,55 +191,27 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 
 ---
 
-## More addons in `R`/Explanation?
+## Why use `R`?
 
-* RGL - `R` adaptation of OpenGL
-* Has 3d extensions of many functions: `plot3d`, `hist3d`, `text3d`, etc.
-* misc3d package [ Feng & Tierney (2008) ] - add ons to this and allows for contours
-* `writeWebGL` - `rgl` function that allows you to write to webGL
-
----
-
-
-## Current methods of visualizing/EDA
-* Look at data by slice over time 
-  * Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis
-
-![plot of chunk lightbox2](figure/lightbox2.png) 
+* Why choose as the main tool? 
+* <span class="black"><b>STATISTICS</b></span> 
+* <span class="black"><b>Packages</b></span> - a lot of cutting edge tools 
+* Open-source
+* <span class="black"><b>Reproducible</b></span> - somewhat lacking in neuroimaging
+* <span class="black"><b>Scriptable</b></span>
+* Exportable
+* It works (You've seen it!)
 
 ---
 
 
+## Moving through Space <span class="black"><b>and</b></span> Time!
 
-## Things Hiding in 2D
-* Real Life Example:
-
-* SubLIME is a MS lesion detection algorithm [Sweeney _et. al._ 2012].  
-* MS - SUBLIME
-* before 3D rendering - didn't notice misregistration
+<img src="238-4136_Thumbnails.png" style="width:780px; height:540px; center;" alt="Lot of code" >
 
 ---
 
-## What (I think) makes a good interactive neuroimaging figure
-
-
-* 3-4D <b>Interactive</b> (move, zoom, remove/add surfaces)
-* Easy to use
-* <b>Quick</b> to render (at least on user level)
-* <b>Transparency</b> (opacity) - subcortical structures
-* No (or very limited) 3rd Party software
-* <span class="black"><b>Exportability</b></span>
-  
-  (Note - current figures do not have all these qualities )
-
----
-
-
-<img src="238-4136_Thumbnails.png" style="width:900px; height:600px; center;" alt="Lot of code" >
-
----
-
-## Slicer Example - CT Data
+## Slicer Example - WebGL export - CT Data
 
 <video width="900" height="580" controls>
   <source src="Slicer_Example.mp4" type="video/mp4" loop="true">
@@ -230,39 +219,18 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 
 ---
 
-## Pros of Using Slicer
 
-* GUI interface - can change opacity/measures interactively WSIWYG-ish
-* Can make <b>exportable</b> (to html) figures
-* Can incorporate into 4D - but not "out of the box" - have to add on javascript 
-* Has many capabilities
-* Scripting interface (I've never used) using `Python`
-
----
+## What (I think) makes a good interactive neuroimaging figure
 
 
-## Why use `R`?
-
-* Why choose as the main tool? 
-* <span class="black"><b>Statistics</b></span> 
-* <span class="black"><b>Packages</b></span> 
-* Open-source
-* <b>REPRODUCIBLE</b> - somewhat lacking in neuroimaging
-* <b>Scriptable</b>
-* Exportable
-* It works (You'll see it!)
-
----
-
-
+* 3-4D <span class="black"><b>Interactive</b></span> (move, zoom, remove/add surfaces)
+* Easy to use
+* <span class="black"><b>Quick</b></span> to render (at least on user level)
+* <span class="black"><b>Transparency</b></span> (opacity) - subcortical structures
+* No (or very limited) 3rd Party software
+* <span class="black"><b>Exportable</b></span>
   
-
-## Where's my 4D?
-
-* Currently 4D is not implemented in `rgl`
-* Can export multiple figures and switch
-  * Doesn't hold camera angle
-  * Current work
+  (Note - current figures do not have all these qualities )
 
 ---
 
@@ -277,6 +245,17 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 <object data="./WebGL/index_dti.html" width="800" height="600"> <embed src="./WebGL/index_dti.html" width="800" height="600"> </embed> Error: Embedded data could not be displayed. </object>
 
 ----
+
+
+## Where's my 4D?
+
+* Currently 4D is not implemented in `rgl`
+* Can export multiple figures and switch
+  * Doesn't hold camera angle
+  * Current research work
+*** Where's the beef?
+
+---
 
  
 
@@ -297,26 +276,8 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 
 <img src="Fiddler.gif" alt="Fiddler" height="200" width="200">
 
-<span class="footnote"> Image from http://tvtropes.org/pmwiki/pmwiki.php/Theatre/FiddlerOnTheRoof?from=Main.FiddlerOnTheRoof</span>
-
----
-
-
-## RGL Caveats
-So RGL rendering is perfect, right?
-
-<img src="html_screenshot.png" height="400" alt="Lot of code">
-
----
-
-
-## RGL Caveats
-
-* Size of gzipped NIfTI file : 418Kb, unzipped 4Mb
-* Size of html output : 30Mb  
-* WebGL can only hold 65535 points in an object - need to break up 
-  * http://biostat.jhsph.edu/~jmuschel/code/WebGL_Example.zip has example of how to do this (thanks to Duncan Murdoch)
-* Also hard to see what's going on in the html
+  <span class="footnote"> Image from http://tvtropes.org/pmwiki/pmwiki.php/Theatre/FiddlerOnTheRoof?from=Main.FiddlerOnTheRoof</span>
+ 
 
 ---
 
@@ -335,12 +296,12 @@ So RGL rendering is perfect, right?
 
 ## Conclusion
 
-* Currently - very good for internal reports/EDA
-* Can integrate into new knitting tools
-* Not accepted as figures in publication in
-* Need journals that can handle
-* You can still include standard figures in text with supplemental material
-* Available methods allow for reproducibility
+* 3D figures are <span class="black"><b>doable</b></span>
+* `R` has a good interface - other tools are available
+* Currently - good for internal reports/<span class="black"><b>EDA</b></span>
+* <span class="black"><b>Not accepted</b></span> as figures - but supplemental material
+* <span class="black"><b>More use</b></span> - better tools and more acceptance
+* Can be done for all `rgl` objects, but use with <span class="black"><b>caution</b></span>
 
 ---
 
@@ -348,8 +309,10 @@ So RGL rendering is perfect, right?
 ## Thanks
 
 * Ciprian Craniceanu and Brian Caffo - SMART Group
+* Dan Hanley - MISTIE Trial
 * Elizabeth Sweeney 
 * Duncan Murdoch - otherwise I'd still be presenting distorted brains
+* Those who created the tools I use without even thinking
 
 ---
 
@@ -412,5 +375,62 @@ From <a href="https://github.com/xtk/SlicerWebGLExport/blob/master/README.md">ht
 (Left 3D Slicer, Right - Google Chrome)
 
 <img src="Slicer_Example_web.png" height="400" width="700" alt="Example of web rendering">
+
+---
+
+## Pros of Using Slicer
+
+* GUI interface - can change opacity/measures interactively WSIWYG-ish
+* Can make <b>exportable</b> (to html) figures
+* Can incorporate into 4D - but not "out of the box" - have to add on javascript 
+* Has many capabilities
+* Scripting interface (I've never used) using `Python`
+
+---
+
+## More addons in `R`/Explanation?
+
+* RGL - `R` adaptation of OpenGL
+* Has 3d extensions of many functions: `plot3d`, `hist3d`, `text3d`, etc.
+* misc3d package [ Feng & Tierney (2008) ] - add ons to this and allows for contours
+* `writeWebGL` - `rgl` function that allows you to write to webGL
+
+---
+
+
+
+## Things Hiding in 2D
+* Real Life Example:
+
+* SubLIME is a MS lesion detection algorithm [Sweeney _et. al._ 2012].  
+* MS - SUBLIME
+* before 3D rendering - didn't notice misregistration
+
+---
+
+## Moving through Space <span class="black"><b>and</b></span> Time!
+* Look at data by slice over time 
+  * Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis
+
+![plot of chunk lightbox2](figure/lightbox2.png) 
+
+---
+
+
+## RGL Caveats
+So RGL rendering is perfect, right?
+
+<img src="html_screenshot.png" height="400" alt="Lot of code">
+
+---
+
+
+## RGL Caveats
+
+* Size of gzipped NIfTI file : 418Kb, unzipped 4Mb
+* Size of html output : 30Mb  
+* WebGL can only hold 65535 points in an object - need to break up 
+  * http://biostat.jhsph.edu/~jmuschel/code/WebGL_Example.zip has example of how to do this (thanks to Duncan Murdoch)
+* Also hard to see what's going on in the html
 
 ---

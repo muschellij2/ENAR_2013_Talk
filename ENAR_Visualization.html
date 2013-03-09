@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="libraries/frameworks/io2012/phone.css" 
     media="only screen and (max-device-width: 480px)" >
   <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
-  <link rel="stylesheet" href="libraries/highlighters/prettify/css/hemisu-dark.css" />
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/hemisu-dark.css" />
   <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
   <script data-main="libraries/frameworks/io2012/js/slides" 
     src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
@@ -32,7 +32,7 @@
     <slide class="title-slide segue nobackground">
       <hgroup class="auto-fadein">
         <h1>Visualizing Brain Imaging in Interactive 3D</h1>
-        <h2>John Muschelli (ENAR 2013)</h2>
+        <h2>John Muschelli  (ENAR 2013)</h2>
         <p>@StrictlyStat (github: muschellij2)<br/>Johns Hopkins Bloomberg School of Public Health</p>
       </hgroup>
           </slide>
@@ -113,15 +113,25 @@
 
       <slide class="" id="slide-5" style="background:;">
   <hgroup>
-    <h2>Overall Message</h2>
+    <h2>Why should I care/do imaging?</h2>
   </hgroup>
   <article>
     <ul>
-<li><p>3D figures can be created/<span class="red"><b>exported easily</b></span></p></li>
-<li><p><span class="red"><b>Standalone</b></span> objects are needed for end-users/readers</p></li>
-<li><p><span class="red"><b>Webpages</b></span> are a good medium for these</p></li>
-<li><p>We need to figure how to effectively incorporate into pipelines/<span class="red"><b>publications</b></span></p></li>
-<li><p>Focus will be on neuroimaging </p></li>
+<li>Non-invasive (think <span class="black">craniotomy</span>)</li>
+<li><p>Potential biomarkers - early identification</p>
+
+<ul>
+<li>Lesions in MS</li>
+<li>Plaques in Alzheimer&#39;s</li>
+<li>White matter volume</li>
+<li>Cortical thickness</li>
+</ul></li>
+<li><p>Outcome measures</p>
+
+<ul>
+<li>Stroke - amount of blood</li>
+<li>Brain activity</li>
+</ul></li>
 </ul>
 
   </article>
@@ -136,16 +146,16 @@
     <p>What kind of data do we have?</p>
 
 <ul>
-<li><span class = "green">Structural MRIs</span></li>
+<li><span class = "green"><b>Structural MRIs</b></span></li>
 <li>Functional MRIs</li>
-<li>Computed Tomography - <span class = "green">CT</span></li>
+<li>Computed Tomography - <span class = "green"><b>CT</b></span></li>
 <li>Diffusion Tensor Imaging (DTI)</li>
 <li>Electroencephalography (EEG)</li>
 <li>Positron Emission Tomography (PET)</li>
 <li>etc. </li>
 </ul>
 
-<p>Visualization and presentation of these data can be <b>improved</b> with the use of 3D tools.</p>
+<p><span class="black"><b>Visualization</b></span> and <span class="black"><b>presentation</b></span> of these data can be <span class="black"><b>improved</b></span> with the use of 3D tools.</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -157,13 +167,14 @@
   </hgroup>
   <article>
     <ul>
+<li><span class = 'green'>RGL</span> (R Graphics Library) [Adler &amp; Murdoch, 2013] using <code>R</code> - <a href="http://cran.r-project.org/">http://cran.r-project.org/</a></li>
 <li><span class = 'green'>3D Slicer</span> - <a href="http://www.slicer.org/">http://www.slicer.org/</a></li>
 <li>Paraview - <a href="http://www.paraview.org/">http://www.paraview.org/</a></li>
-<li><span class = 'green'>RGL</span> (R Graphics Library) [Adler &amp; Murdoch, 2013] using <code>R</code> - <a href="http://cran.r-project.org/">http://cran.r-project.org/</a></li>
 <li>Freesurfer - <a href="http://surfer.nmr.mgh.harvard.edu/">http://surfer.nmr.mgh.harvard.edu/</a></li>
 <li>AFNI - <a href="http://afni.nimh.nih.gov/afni">http://afni.nimh.nih.gov/afni</a></li>
 <li>MIPAV - <a href="http://mipav.cit.nih.gov/">http://mipav.cit.nih.gov/</a></li>
-<li>Matlab, etc.</li>
+<li>Matlab</li>
+<li>Many more</li>
 </ul>
 
   </article>
@@ -172,11 +183,27 @@
 
       <slide class="" id="slide-8" style="background:;">
   <hgroup>
+    <h2>Overall Message</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li><p>3D (<span class="red"><b>neuroimaging</b></span>)  figures can be created/<span class="red"><b>exported easily</b></span></p></li>
+<li><p><span class="red"><b>Standalone</b></span> objects are needed for end-users/readers</p></li>
+<li><p><span class="red"><b>Webpages</b></span> are a good medium for these</p></li>
+<li><p>We need to figure how to effectively incorporate into pipelines/<span class="red"><b>publications</b></span></p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-9" style="background:;">
+  <hgroup>
     <h2>Current methods of visualizing/EDA</h2>
   </hgroup>
   <article>
     <ul>
-<li>Time series of individual voxels/regions of interest (ROI) <b>Keep 2D</b></li>
+<li>Time series of individual voxels/regions of interest (ROI) <span class="black"><b>Keep 2D</b></span></li>
 <li>Look at data cross-sectionally (&quot;Lightbox&quot;)</li>
 </ul>
 
@@ -190,7 +217,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-9" style="background:;">
+      <slide class="" id="slide-10" style="background:;">
   <hgroup>
     <h2>Current methods of visualizing/EDA</h2>
   </hgroup>
@@ -204,7 +231,7 @@ Using orthographic from <code>oro.nifti</code> package:</p>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-10" style="background:;">
+      <slide class="" id="slide-11" style="background:;">
   <hgroup>
     <h2>Example of 3D in <code>R</code></h2>
   </hgroup>
@@ -215,7 +242,7 @@ Using orthographic from <code>oro.nifti</code> package:</p>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-11" style="background:;">
+      <slide class="" id="slide-12" style="background:;">
   <hgroup>
     <h2>How do I do this in <code>R</code>? - Example</h2>
   </hgroup>
@@ -245,36 +272,21 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-12" style="background:;">
-  <hgroup>
-    <h2>More addons in <code>R</code>/Explanation?</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>RGL - <code>R</code> adaptation of OpenGL</li>
-<li>Has 3d extensions of many functions: <code>plot3d</code>, <code>hist3d</code>, <code>text3d</code>, etc.</li>
-<li>misc3d package [ Feng &amp; Tierney (2008) ] - add ons to this and allows for contours</li>
-<li><code>writeWebGL</code> - <code>rgl</code> function that allows you to write to webGL</li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
       <slide class="" id="slide-13" style="background:;">
   <hgroup>
-    <h2>Current methods of visualizing/EDA</h2>
+    <h2>Why use <code>R</code>?</h2>
   </hgroup>
   <article>
     <ul>
-<li>Look at data by slice over time 
-
-<ul>
-<li>Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis</li>
-</ul></li>
+<li>Why choose as the main tool? </li>
+<li><span class="black"><b>STATISTICS</b></span> </li>
+<li><span class="black"><b>Packages</b></span> - a lot of cutting edge tools </li>
+<li>Open-source</li>
+<li><span class="black"><b>Reproducible</b></span> - somewhat lacking in neuroimaging</li>
+<li><span class="black"><b>Scriptable</b></span></li>
+<li>Exportable</li>
+<li>It works (You&#39;ve seen it!)</li>
 </ul>
-
-<p><img src="figure/lightbox2.png" alt="plot of chunk lightbox2"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -282,15 +294,10 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
 
       <slide class="" id="slide-14" style="background:;">
   <hgroup>
-    <h2>Things Hiding in 2D</h2>
+    <h2>Moving through Space <span class="black"><b>and</b></span> Time!</h2>
   </hgroup>
   <article>
-    <ul>
-<li><p>Real Life Example:</p></li>
-<li><p>SubLIME is a MS lesion detection algorithm [Sweeney <em>et. al.</em> 2012].  </p></li>
-<li><p>MS - SUBLIME</p></li>
-<li><p>before 3D rendering - didn&#39;t notice misregistration</p></li>
-</ul>
+    <p><img src="238-4136_Thumbnails.png" style="width:780px; height:540px; center;" alt="Lot of code" ></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -298,38 +305,7 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
 
       <slide class="" id="slide-15" style="background:;">
   <hgroup>
-    <h2>What (I think) makes a good interactive neuroimaging figure</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>3-4D <b>Interactive</b> (move, zoom, remove/add surfaces)</li>
-<li>Easy to use</li>
-<li><b>Quick</b> to render (at least on user level)</li>
-<li><b>Transparency</b> (opacity) - subcortical structures</li>
-<li>No (or very limited) 3rd Party software</li>
-<li><p><span class="black"><b>Exportability</b></span></p>
-
-<p>(Note - current figures do not have all these qualities )</p></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-16" style="background:;">
-  <hgroup>
-    
-  </hgroup>
-  <article>
-    <p><img src="238-4136_Thumbnails.png" style="width:900px; height:600px; center;" alt="Lot of code" ></p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-17" style="background:;">
-  <hgroup>
-    <h2>Slicer Example - CT Data</h2>
+    <h2>Slicer Example - WebGL export - CT Data</h2>
   </hgroup>
   <article>
     <p><video width="900" height="580" controls>
@@ -340,63 +316,27 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-18" style="background:;">
+      <slide class="" id="slide-16" style="background:;">
   <hgroup>
-    <h2>Pros of Using Slicer</h2>
+    <h2>What (I think) makes a good interactive neuroimaging figure</h2>
   </hgroup>
   <article>
     <ul>
-<li>GUI interface - can change opacity/measures interactively WSIWYG-ish</li>
-<li>Can make <b>exportable</b> (to html) figures</li>
-<li>Can incorporate into 4D - but not &quot;out of the box&quot; - have to add on javascript </li>
-<li>Has many capabilities</li>
-<li>Scripting interface (I&#39;ve never used) using <code>Python</code></li>
+<li>3-4D <span class="black"><b>Interactive</b></span> (move, zoom, remove/add surfaces)</li>
+<li>Easy to use</li>
+<li><span class="black"><b>Quick</b></span> to render (at least on user level)</li>
+<li><span class="black"><b>Transparency</b></span> (opacity) - subcortical structures</li>
+<li>No (or very limited) 3rd Party software</li>
+<li><p><span class="black"><b>Exportable</b></span></p>
+
+<p>(Note - current figures do not have all these qualities )</p></li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-19" style="background:;">
-  <hgroup>
-    <h2>Why use <code>R</code>?</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>Why choose as the main tool? </li>
-<li><span class="black"><b>Statistics</b></span> </li>
-<li><span class="black"><b>Packages</b></span> </li>
-<li>Open-source</li>
-<li><b>REPRODUCIBLE</b> - somewhat lacking in neuroimaging</li>
-<li><b>Scriptable</b></li>
-<li>Exportable</li>
-<li>It works (You&#39;ll see it!)</li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-20" style="background:;">
-  <hgroup>
-    <h2>Where&#39;s my 4D?</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>Currently 4D is not implemented in <code>rgl</code></li>
-<li>Can export multiple figures and switch
-
-<ul>
-<li>Doesn&#39;t hold camera angle</li>
-<li>Current work</li>
-</ul></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-21" style="background:;">
+      <slide class="" id="slide-17" style="background:;">
   <hgroup>
     <h2>DTI Example</h2>
   </hgroup>
@@ -407,7 +347,27 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-22" style="background:;">
+      <slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Where&#39;s my 4D?</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Currently 4D is not implemented in <code>rgl</code></li>
+<li>Can export multiple figures and switch
+
+<ul>
+<li>Doesn&#39;t hold camera angle</li>
+<li>Current research work
+*** Where&#39;s the beef?</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Why are we still 2D?</h2>
   </hgroup>
@@ -438,40 +398,7 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-23" style="background:;">
-  <hgroup>
-    <h2>RGL Caveats</h2>
-  </hgroup>
-  <article>
-    <p>So RGL rendering is perfect, right?</p>
-
-<p><img src="html_screenshot.png" height="400" alt="Lot of code"></p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-24" style="background:;">
-  <hgroup>
-    <h2>RGL Caveats</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>Size of gzipped NIfTI file : 418Kb, unzipped 4Mb</li>
-<li>Size of html output : 30Mb<br></li>
-<li>WebGL can only hold 65535 points in an object - need to break up 
-
-<ul>
-<li><a href="http://biostat.jhsph.edu/%7Ejmuschel/code/WebGL_Example.zip">http://biostat.jhsph.edu/~jmuschel/code/WebGL_Example.zip</a> has example of how to do this (thanks to Duncan Murdoch)</li>
-</ul></li>
-<li>Also hard to see what&#39;s going on in the html</li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-25" style="background:;">
+      <slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>Markdown - Use <code>R</code>!</h2>
   </hgroup>
@@ -495,40 +422,42 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-26" style="background:;">
+      <slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Conclusion</h2>
   </hgroup>
   <article>
     <ul>
-<li>Currently - very good for internal reports/EDA</li>
-<li>Can integrate into new knitting tools</li>
-<li>Not accepted as figures in publication in</li>
-<li>Need journals that can handle</li>
-<li>You can still include standard figures in text with supplemental material</li>
-<li>Available methods allow for reproducibility</li>
+<li>3D figures are <span class="black"><b>doable</b></span></li>
+<li><code>R</code> has a good interface - other tools are available</li>
+<li>Currently - good for internal reports/<span class="black"><b>EDA</b></span></li>
+<li><span class="black"><b>Not accepted</b></span> as figures - but supplemental material</li>
+<li><span class="black"><b>More use</b></span> - better tools and more acceptance</li>
+<li>Can be done for all <code>rgl</code> objects, but use with <span class="black"><b>caution</b></span></li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-27" style="background:;">
+      <slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>Thanks</h2>
   </hgroup>
   <article>
     <ul>
 <li>Ciprian Craniceanu and Brian Caffo - SMART Group</li>
+<li>Dan Hanley - MISTIE Trial</li>
 <li>Elizabeth Sweeney </li>
 <li>Duncan Murdoch - otherwise I&#39;d still be presenting distorted brains</li>
+<li>Those who created the tools I use without even thinking</li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-28" style="background:;">
+      <slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>Biblio</h2>
   </hgroup>
@@ -578,7 +507,7 @@ Using Multisequence Longitudinal MRI.&rdquo;
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-29" style="background:;">
+      <slide class="" id="slide-24" style="background:;">
   <hgroup>
     <h2>Slicer</h2>
   </hgroup>
@@ -593,7 +522,7 @@ Using Multisequence Longitudinal MRI.&rdquo;
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-30" style="background:;">
+      <slide class="" id="slide-25" style="background:;">
   <hgroup>
     <h2>Slicer Example</h2>
   </hgroup>
@@ -608,7 +537,108 @@ Using Multisequence Longitudinal MRI.&rdquo;
   <!-- Presenter Notes -->
 </slide>
 
+      <slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>Pros of Using Slicer</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>GUI interface - can change opacity/measures interactively WSIWYG-ish</li>
+<li>Can make <b>exportable</b> (to html) figures</li>
+<li>Can incorporate into 4D - but not &quot;out of the box&quot; - have to add on javascript </li>
+<li>Has many capabilities</li>
+<li>Scripting interface (I&#39;ve never used) using <code>Python</code></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>More addons in <code>R</code>/Explanation?</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>RGL - <code>R</code> adaptation of OpenGL</li>
+<li>Has 3d extensions of many functions: <code>plot3d</code>, <code>hist3d</code>, <code>text3d</code>, etc.</li>
+<li>misc3d package [ Feng &amp; Tierney (2008) ] - add ons to this and allows for contours</li>
+<li><code>writeWebGL</code> - <code>rgl</code> function that allows you to write to webGL</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>Things Hiding in 2D</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li><p>Real Life Example:</p></li>
+<li><p>SubLIME is a MS lesion detection algorithm [Sweeney <em>et. al.</em> 2012].  </p></li>
+<li><p>MS - SUBLIME</p></li>
+<li><p>before 3D rendering - didn&#39;t notice misregistration</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>Moving through Space <span class="black"><b>and</b></span> Time!</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Look at data by slice over time 
+
+<ul>
+<li>Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis</li>
+</ul></li>
+</ul>
+
+<p><img src="figure/lightbox2.png" alt="plot of chunk lightbox2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>RGL Caveats</h2>
+  </hgroup>
+  <article>
+    <p>So RGL rendering is perfect, right?</p>
+
+<p><img src="html_screenshot.png" height="400" alt="Lot of code"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
       <slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    <h2>RGL Caveats</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Size of gzipped NIfTI file : 418Kb, unzipped 4Mb</li>
+<li>Size of html output : 30Mb<br></li>
+<li>WebGL can only hold 65535 points in an object - need to break up 
+
+<ul>
+<li><a href="http://biostat.jhsph.edu/%7Ejmuschel/code/WebGL_Example.zip">http://biostat.jhsph.edu/~jmuschel/code/WebGL_Example.zip</a> has example of how to do this (thanks to Duncan Murdoch)</li>
+</ul></li>
+<li>Also hard to see what&#39;s going on in the html</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-32" style="background:;">
   <hgroup>
     
   </hgroup>
@@ -632,14 +662,8 @@ Using Multisequence Longitudinal MRI.&rdquo;
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
 <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery-1.7.min.js"><\/script>')</script>
 <!-- Load Javascripts for Widgets -->
-<!-- Google Prettify -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
-<script src='libraries/highlighters/prettify/js/lang-r.js'></script>
-<script>
-  var pres = document.getElementsByTagName("pre");
-  for (var i=0; i < pres.length; ++i) {
-    pres[i].className = "prettyprint ";
-  }
-  prettyPrint();
-</script>
-<!-- End Google Prettify --></html>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+</html>
