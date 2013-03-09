@@ -1,0 +1,307 @@
+\ProvidesPackage{bensbeamernotepage}[2010/09/02 Beamer note page template]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Copyright 2009, 2010 Benjamin Kellermann                                 %
+%                                                                          %
+% This program is free software: you can redistribute it and/or modify it  %
+% under the terms of the GNU General Public License as published by the    %
+% Free Software Foundation, either version 3 of the License, or (at your   %
+% option) any later version.                                               %
+%                                                                          %
+% This program is distributed in the hope that it will be useful, but      %
+% WITHOUT ANY WARRANTY; without even the implied warranty of               %
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU        %
+% General Public License for more details.                                 %
+%                                                                          %
+% You should have received a copy of the GNU General Public License along  %
+% with this program.  If not, see <http://www.gnu.org/licenses/>.          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% note page template
+% USAGE:
+% 1. compile without notes
+% 2. cp presentation.pdf presentation_without_notes.pdf
+% 3. compile with notepackage and previewfilename
+%    \usepackage[%
+%      previewfilename=presentation_without_notes,
+%    ]{bensbeamernotepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% all options (see description below):
+%  previewfilename,paperratio,time
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% this is the x-ratio for the presentation-slide.
+% e.g., if your screen is of size 1400 and the projector has
+% output of 1024, you have to set this to 1024/1400=0.7314
+% it should not be bigger than this value, 
+% as the size for the notes is to less otherwise
+% 800/1400 = 0.57142
+% the paperratio can be set with 
+% \usepackage[paperratio=0.7314]{bensbeamernotepage}
+% note, that currently only this ratio is well supported
+\newcommand{\paperratio}{.7314} 
+
+\RequirePackage{xkeyval}
+\newcommand{\bensbeamernotepage@previewfilename}{}
+\DeclareOptionX{previewfilename}[]{\renewcommand{\bensbeamernotepage@previewfilename}{#1}}
+\DeclareOptionX{paperratio}[]{\renewcommand{\paperratio}{#1}}
+
+
+% set the time you have for your talk in minutes with this option, e.g.,
+% \usepackage[time=10]{bensbeamernotepage}
+\newcommand{\totaltime}{0}
+\DeclareOptionX{time}{\renewcommand{\totaltime}{#1}}
+\ProcessOptionsX*
+
+% this is the JavaScript code, which counts the time in the pdf
+% it updates \TextField's which are put within the note page template
+\RequirePackage[pdftex]{insdljs}
+\begin{insDLJS}{count}{Count the time, used at the single slides}
+	var i = [];
+	var countdown = false;
+	if (\totaltime != 0){
+		countdown = true;
+	}
+	var total= \totaltime*60;
+	function int2time(i){
+		var s = Math.abs(i\%60);
+		if (s < 10){
+			s = "0" + s;
+		}
+
+		if (i < 0){
+			return "-" + Math.abs(Math.round(i/60+0.4999)) + ":" + s;
+		} else {
+			return Math.round(i/60-0.5) + ":" + s;
+		}
+	}
+	function tick(){
+		var frameNum = this.getField("frame" + (this.pageNum+2)).value;
+		if (typeof i[frameNum]=='undefined'){
+			i[frameNum] = 0;
+		}
+
+		/* only count and update if checkbox is set */
+		if (this.getField("count").value == "Yes"){
+			// count
+			i[frameNum] += 1;
+
+			if (this.pageNum != 0) {
+				if (countdown){
+					total -= 1;
+				} else {
+					total += 1;
+				}
+			}
+
+			// update
+			if (this.getField("totaltimer" + (this.pageNum+2)) != null){
+				this.getField("pagetimer" + (this.pageNum+2)).value = int2time(i[frameNum]);
+				this.getField("totaltimer" + (this.pageNum+2)).value = int2time(total);
+				this.getField("clickratio" + (this.pageNum+2)).value = Math.round(this.pageNum*60/total*100)/100;
+				this.getField("totalratio" + (this.pageNum+2)).value = Math.round(((frameNum-1)*60.0*100)/total)/100;
+			}
+		}
+	}
+	var timeout = app.setInterval("tick()",1000);
+
+	function reset(){
+		console.println("Request for reset. Old values:\n" + result());
+		for (var n=1; n < i.length; n++){
+			i[n] = 0;
+			total = \totaltime*60;
+		}
+	}
+
+	function result(){
+		var ret = "slide: time in s\n";
+		for (var n=2; n < i.length; n++){
+			ret += n + ": " + i[n] + "\n";
+		}
+		ret += "total: " + total;
+		return ret;
+	}
+	function printResult(){
+		console.clear();
+		console.println("================= result =====================\n" + result() + "\n============= end result =====================\n");
+		console.show();
+//		app.alert({ cMsg: ret, nIcon: 3, cTitle: "Result"});
+	}
+\end{insDLJS}
+
+
+% first part of the dirty hack following ;--)
+% the output is just the note page without the actual page
+\RequirePackage{pgfpages}
+\setbeameroption{show notes on second screen=left}
+\pgfpagesphysicalpageoptions{%
+	logical pages=2,%
+	physical width=\paperwidth,%
+	last logical shipout=1%
+}
+
+
+\RequirePackage{hyperref}
+\hypersetup{pdfpagemode = UseNone}
+\RequirePackage{tikz}
+\let\org@frame\frame
+\let\org@endframe\endframe
+\renewenvironment{frame}%
+	{%
+		\label{frame_\insertframenumber}
+		\org@frame%
+	}{\org@endframe}
+
+\RequirePackage{forloop}
+\RequirePackage{ifthen}
+\newcounter{bensbeamer@ct}
+\newcounter{bensbeamer@colct}
+\newcounter{totalplusone}
+% \preview{10} delivers the 10th page from the file set with 
+% the previewfilename option
+\newcommand{\preview}[1]{%
+	\ifthenelse{\equal{\bensbeamernotepage@previewfilename}{}}{%
+		\centering
+		\begin{minipage}[t][.75\textwidth][c]{.95\textwidth}
+			\centering
+			no preview available\\[1ex]
+			compile a file without notes and set the option \texttt{previewfilename=}
+		\end{minipage}
+	}{%
+		\ifthenelse{\equal{\inserttotalpagenumber}{??}}{%
+			\centering
+			\begin{minipage}[t][.75\textwidth][c]{.95\textwidth}
+				\centering
+				please compile the document once more
+			\end{minipage}
+		}{\includegraphics[width=\textwidth,page=#1]{\bensbeamernotepage@previewfilename}}
+	}
+}
+\newcounter{lastpage}
+\providecommand{\inserttotalpagenumber}{??}
+\AtEndDocument{%
+	\immediate\write\@auxout{\string\@writefile{nav}%
+			{\noexpand\headcommand{\noexpand\def\noexpand\inserttotalpagenumber{\thelastpage}}}}
+}
+\RequirePackage{booktabs}
+\setbeamertemplate{note page}{%
+\begin{tikzpicture}[inner sep=1pt,overlay,remember picture]
+	% start Timer
+	\node[anchor=south west,inner sep=0pt,outer sep=0pt,yshift=2pt] (totaltimer) at (current page.south west){%
+		\TextField[hidden=false,width=0em,bordercolor={1 1 1},readonly=true,name=frame\insertpagenumber,value=\insertframenumber]{}%
+		\tiny%
+		\settowidth{\tabcolsep}{\,}
+		\begin{tabular}{rlrl}
+			\toprule%
+			this:\vphantom{\normalsize X}%
+			&\TextField[%
+				name=pagetimer\insertpagenumber,%
+				width=3.1em,%
+				bordercolor={1 1 1},%
+				readonly=true%
+				]{}%
+			%
+			&\TextField[%
+				name=clickratio\insertpagenumber,%
+				width=3.5em,%
+				bordercolor={1 1 1},%
+				readonly=true%
+			]{}
+			&$\frac{\text{click}}{min}$
+			\tabularnewline
+			%
+			total:\vphantom{\normalsize X}%
+			&\TextField[%
+				name=totaltimer\insertpagenumber,%
+				width=3.1em,%
+				bordercolor={1 1 1},%
+				readonly=true%
+			]{}%
+			%
+			&\TextField[%
+				name=totalratio\insertpagenumber,%
+				width=3.5em,%
+				bordercolor={1 1 1},%
+				readonly=true%
+			]{}%
+			&$\frac{\text{slide}}{min}$
+			\tabularnewline
+			\bottomrule
+		\end{tabular}
+	}; %end timer
+
+	% summary button (only on first page)
+	\ifthenelse{\equal{\insertpagenumber}{2}}{%
+		\node[anchor=south west] at (totaltimer.north west) {%
+			\begin{Form}
+				\begin{tabular}{cc}
+					\PushButton[onclick=printResult(),bordercolor={1 1 1}]{\tiny Show Summary}
+					&\PushButton[onclick=reset(),bordercolor={1 1 1}]{\tiny Reset Timer}
+					\tabularnewline
+					\CheckBox[bordercolor={1 1 1},checked=true,width=1.5em,name=count]{\tiny Count Time?}
+				\end{tabular}
+			\end{Form}
+		};
+	}{}
+
+	% second part of dirty hack
+	% Here, the current page is displayed. It would be better to not take it
+	% from the previewfile but typeset it directly. A problem is heavy usage of
+	% TiKZ with remember picture etc, as some lines draw through all the note page
+	\node[anchor=north east,inner sep=0pt,outer sep=0pt,text width=\paperratio\paperwidth] (thisslide) at (current page.north east) {%
+		\setcounter{bensbeamer@ct}{\insertpagenumber-1}
+		\preview{\arabic{bensbeamer@ct}}
+	};
+
+	% navi symbols
+	\path (current page.north west) -- (thisslide.north west) node[midway] (freemid) {};
+	\node[anchor=north,text width=1.6cm] (navigation) at (freemid) {%
+		\insertframenavigationsymbol
+		\insertbackfindforwardnavigationsymbol
+	};
+
+	% direct jump to all pages
+	\node[anchor=north,text centered,text width=5cm,inner sep=0,outer sep=0] (pages) at (navigation.south) {%
+		\tiny
+		\setcounter{totalplusone}{\inserttotalframenumber+1}
+		\begin{tabular}{r@{~}r@{~}r@{~}r@{~}r@{~}r@{~}r@{~}r@{~}r@{~}r@{~}r@{~}}%
+			\setcounter{bensbeamer@ct}{1}%
+			\whiledo{\value{bensbeamer@ct} < \value{totalplusone}}{%
+				\forloop{bensbeamer@colct}{1}{\value{bensbeamer@colct} < 11 \and \value{bensbeamer@ct} < \value{totalplusone}}{%
+					\hyperlink{frame_\arabic{bensbeamer@ct}}{%
+						\ifthenelse{\equal{\arabic{bensbeamer@ct}}{\insertframenumber}}%
+							{\arabic{bensbeamer@ct}}{\color{gray}\arabic{bensbeamer@ct}}%
+					}&%
+					\stepcounter{bensbeamer@ct}%
+				}%
+				\ifthenelse{\value{bensbeamer@ct} < \value{totalplusone}}{\\}{}%
+			}%
+		\end{tabular}
+	};
+
+	% TOC for direct jump possibility
+	\node[below,yshift=-6pt,anchor=north west,text width=3.3cm] (toc) at (pages.south-|current page.west) {%
+		\tiny
+ 		\setcounter{tocdepth}{2}
+		\tableofcontents[currentsubsection]
+		\setcounter{tocdepth}{4}
+	};
+
+	% preview of next slide
+	\node[anchor=north east,draw,text width=3.3cm] (nextslide) at (thisslide.south east) {%
+		\setcounter{lastpage}{\insertpagenumber-1}
+		\setcounter{bensbeamer@ct}{\insertpagenumber-1}
+		\ifthenelse%
+			{\equal{\arabic{bensbeamer@ct}}{\inserttotalpagenumber}}%
+			{\setcounter{bensbeamer@ct}{1}}%
+			{\setcounter{bensbeamer@ct}{\insertpagenumber}}
+			\preview{\arabic{bensbeamer@ct}}
+	};
+
+	% the actual notes in tiny font
+	\node[anchor=north east,font=\tiny,text width=5.9cm] (notes) at (nextslide.north west) {%
+			\insertnote
+	};
+\end{tikzpicture}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,44 @@
+\documentclass[10pt]{report}
+\usepackage{graphicx, color}
+\usepackage{amsmath}
+
+\begin{document}
+
+
+\begin{table}[h]
+	\begin{tabular}{c|m{1in}|m{1in}|}
+	\hline
+	Software & Pros & Cons \\
+	Slicer & Lightweight rendering, export to multiple formats & Python Scripting (Pro?) \\
+	Slicer & & Import all types of formats \\
+	Paraview & Lightweight Rendering & \\
+	Paraview & Lightweight Rendering & Import all types of formats \\
+	RGL, WebGL, OpenGL & & Scripting (Pro?) \\
+	MeshLab & Converts Multiple formats & Not easy alpha blending, Not much brain data import \\
+	Asymptote &  & Scripting language \\
+	Adobe Presenter &  & Cost \\
+	\hline
+	\end{tabular}
+\end{table}
+\end{frame}
+%
+\begin{frame}{Where to Render}%{Subtitles are optional.}
+\begin{table}
+{\scriptsize
+	\begin{tabular}{c|m{0.5in}|c|}
+	\hline
+	& Pros & Cons \\
+	\multirow{3}{*}{Web} &  & Need Internet \\
+	& Updatable  &  Not linked to paper\\
+	& Many tools available & Some html may be required \\
+	& & \\ \hline
+	\multirow{3}{*}{PDF} & Embedded all in one document - linked  & Need Adobe\\
+	& Embedded all in one document & Only certain format (u3d, prc, etc) \\
+	&  & Javascript may be possible \\
+	\hline
+	\end{tabular}
+}
+\end{table}
+
+
+\end{document}

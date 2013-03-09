@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visualizing Brain Imaging in Interactive 3D</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Visualizing Brain Imaging in Interactive 3D">
+  <meta name="author" content="@StrictlyStat (github: muschellij2)">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/prettify/css/hemisu-dark.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+    
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+    <!-- END LOGO SLIDE -->
+    
+
+    <!-- TITLE SLIDE -->
+    <!-- Should I move this to a Local Layout File? -->
+    <slide class="title-slide segue nobackground">
+      <hgroup class="auto-fadein">
+        <h1>Visualizing Brain Imaging in Interactive 3D</h1>
+        <h2>John Muschelli (ENAR 2013)</h2>
+        <p>@StrictlyStat (github: muschellij2)<br/>Johns Hopkins Bloomberg School of Public Health</p>
+      </hgroup>
+          </slide>
+
+    <!-- SLIDES -->
+      <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    <!---
+<object data="./WebGL/index.html" width="600" height="400"> <embed src="./WebGL/index.html" width="600" height="400"> </embed> Error: Embedded data could not be displayed. </object>
+-->
+
+<h2>About Me</h2>
+
+<ul>
+<li><p>PhD student in Biostatistics at Johns Hopkins Bloomberg School of Public Health with <span class="black"><b>Ciprian Craniceanu</b></span></p></li>
+<li><p>ScM 2010 (<span class="black"><b>Brian Caffo</b></span>)</p></li>
+<li><p>Worked in fMRI/CT for last 4 years</p></li>
+<li><p>Part of the <span class="black"><b>SMART group</b></span>, and ADHD-200 competition winners</p></li>
+<li><p><a href="http://biostat.jhsph.edu/%7Ejmuschel/">http://biostat.jhsph.edu/~jmuschel/</a></p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>R programs used for this presentation</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li><code>knitr</code> [Xie (2013)] - compiles R code within markdown</li>
+<li><code>slidify</code> [Vaidyanathan (2012)] - makes awesome slide decks (in html)</li>
+<li><code>knitcitations</code> [Boettiger (2013)] - allows my BibTeX to cite in <code>knitr</code></li>
+<li><code>RStudio</code> [RStudio (2013)] - integrated R IDE</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>3D Graphics?</h2>
+  </hgroup>
+  <article>
+    <p><img src="3D_Hist.png" style="width:400px; height:400px; border:1px solid blue; float:left;" alt="Lot of code" ></p>
+
+<p><img src="3D_Excel.png"  style="width:500px; height:400px; border:1px solid blue; float:right;" alt="Lot of code"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>I&#39;m not referring to 3D histograms</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>3D is not good just because of one more D</li>
+<li>3D data representing 2D is still bad
+
+<ul>
+<li>No 3D Pie charts/histograms</li>
+<li>See Karl Broman&#39;s <a href="http://www.biostat.wisc.edu/%7Ekbroman/topten_worstgraphs/">The top ten worst graphs</a></li>
+</ul></li>
+</ul>
+
+<p><img src="figure/piechart.png" style="width:400px; height:400px" alt="plot of chunk piechart"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Overall Message</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li><p>3D figures can be created/<span class="red"><b>exported easily</b></span></p></li>
+<li><p><span class="red"><b>Standalone</b></span> objects are needed for end-users/readers</p></li>
+<li><p><span class="red"><b>Webpages</b></span> are a good medium for these</p></li>
+<li><p>We need to figure how to effectively incorporate into pipelines/<span class="red"><b>publications</b></span></p></li>
+<li><p>Focus will be on neuroimaging </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Neuroimaging Data</h2>
+  </hgroup>
+  <article>
+    <p>What kind of data do we have?</p>
+
+<ul>
+<li><span class = "green">Structural MRIs</span></li>
+<li>Functional MRIs</li>
+<li>Computed Tomography - <span class = "green">CT</span></li>
+<li>Diffusion Tensor Imaging (DTI)</li>
+<li>Electroencephalography (EEG)</li>
+<li>Positron Emission Tomography (PET)</li>
+<li>etc. </li>
+</ul>
+
+<p>Visualization and presentation of these data can be <b>improved</b> with the use of 3D tools.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>3D rendering tools out there</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li><span class = 'green'>3D Slicer</span> - <a href="http://www.slicer.org/">http://www.slicer.org/</a></li>
+<li>Paraview - <a href="http://www.paraview.org/">http://www.paraview.org/</a></li>
+<li><span class = 'green'>RGL</span> (R Graphics Library) [Adler &amp; Murdoch, 2013] using <code>R</code> - <a href="http://cran.r-project.org/">http://cran.r-project.org/</a></li>
+<li>Freesurfer - <a href="http://surfer.nmr.mgh.harvard.edu/">http://surfer.nmr.mgh.harvard.edu/</a></li>
+<li>AFNI - <a href="http://afni.nimh.nih.gov/afni">http://afni.nimh.nih.gov/afni</a></li>
+<li>MIPAV - <a href="http://mipav.cit.nih.gov/">http://mipav.cit.nih.gov/</a></li>
+<li>Matlab, etc.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Current methods of visualizing/EDA</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Time series of individual voxels/regions of interest (ROI) <b>Keep 2D</b></li>
+<li>Look at data cross-sectionally (&quot;Lightbox&quot;)</li>
+</ul>
+
+<p>Using image.nifti from <code>oro.nifti</code>  [Whitcher <em>et. al.</em> (2011)] package:</p>
+
+<p><span class="black"><b>Read left to right like a book</b></span></p>
+
+<p><img src="figure/lightbox.png" alt="plot of chunk lightbox"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Current methods of visualizing/EDA</h2>
+  </hgroup>
+  <article>
+    <p>Overall, most methods keep temporal or 2D spatial components fixed and vary the other. 
+Using orthographic from <code>oro.nifti</code> package:</p>
+
+<p><img src="figure/ortho.png" alt="plot of chunk ortho"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Example of 3D in <code>R</code></h2>
+  </hgroup>
+  <article>
+    <p><object data="./WebGL/index.html" width="800" height="600"> <embed src="./WebGL/index.html" width="800" height="600"> </embed> Error: Embedded data could not be displayed. </object></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>How do I do this in <code>R</code>? - Example</h2>
+  </hgroup>
+  <article>
+    <pre><code class="r">### read in brain image
+tmp &lt;- readNIfTI(&quot;MNI152_T1_2mm_brain.nii&quot;, reorient = FALSE)
+dtemp &lt;- dim(tmp)
+### make the surface object - RGL renders
+contour3d(tmp, x = 1:dtemp[1], y = 1:dtemp[2], z = 1:dtemp[3], level = 4500, 
+    alpha = 0.15)
+
+### this would be the ``activation&#39;&#39; or surface you want to render here
+### just taking the upper WM from the template image
+contour3d(tmp, level = c(8200, 8250), alpha = c(0.5, 0.8), add = TRUE, color = c(&quot;yellow&quot;, 
+    &quot;red&quot;))
+
+### add text
+text3d(x = dtemp[1]/2, y = dtemp[2]/2, z = dtemp[3] * 0.98, text = &quot;Top&quot;)
+text3d(x = dtemp[1] * 0.98, y = dtemp[2]/2, z = dtemp[3]/2, text = &quot;Right&quot;)
+
+### export this to a webpage
+writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height = 500, 
+    template = file.path(outdir, &quot;my_template.html&quot;))
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>More addons in <code>R</code>/Explanation?</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>RGL - <code>R</code> adaptation of OpenGL</li>
+<li>Has 3d extensions of many functions: <code>plot3d</code>, <code>hist3d</code>, <code>text3d</code>, etc.</li>
+<li>misc3d package [ Feng &amp; Tierney (2008) ] - add ons to this and allows for contours</li>
+<li><code>writeWebGL</code> - <code>rgl</code> function that allows you to write to webGL</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Current methods of visualizing/EDA</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Look at data by slice over time 
+
+<ul>
+<li>Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis</li>
+</ul></li>
+</ul>
+
+<p><img src="figure/lightbox2.png" alt="plot of chunk lightbox2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Things Hiding in 2D</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li><p>Real Life Example:</p></li>
+<li><p>SubLIME is a MS lesion detection algorithm [Sweeney <em>et. al.</em> 2012].  </p></li>
+<li><p>MS - SUBLIME</p></li>
+<li><p>before 3D rendering - didn&#39;t notice misregistration</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>What (I think) makes a good interactive neuroimaging figure</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>3-4D <b>Interactive</b> (move, zoom, remove/add surfaces)</li>
+<li>Easy to use</li>
+<li><b>Quick</b> to render (at least on user level)</li>
+<li><b>Transparency</b> (opacity) - subcortical structures</li>
+<li>No (or very limited) 3rd Party software</li>
+<li><p><span class="black"><b>Exportability</b></span></p>
+
+<p>(Note - current figures do not have all these qualities )</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    <p><img src="238-4136_Thumbnails.png" style="width:900px; height:600px; center;" alt="Lot of code" ></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Slicer Example - CT Data</h2>
+  </hgroup>
+  <article>
+    <p><video width="900" height="580" controls>
+  <source src="Slicer_Example.mp4" type="video/mp4" loop="true">
+</video></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Pros of Using Slicer</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>GUI interface - can change opacity/measures interactively WSIWYG-ish</li>
+<li>Can make <b>exportable</b> (to html) figures</li>
+<li>Can incorporate into 4D - but not &quot;out of the box&quot; - have to add on javascript </li>
+<li>Has many capabilities</li>
+<li>Scripting interface (I&#39;ve never used) using <code>Python</code></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Why use <code>R</code>?</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Why choose as the main tool? </li>
+<li><span class="black"><b>Statistics</b></span> </li>
+<li><span class="black"><b>Packages</b></span> </li>
+<li>Open-source</li>
+<li><b>REPRODUCIBLE</b> - somewhat lacking in neuroimaging</li>
+<li><b>Scriptable</b></li>
+<li>Exportable</li>
+<li>It works (You&#39;ll see it!)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Where&#39;s my 4D?</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Currently 4D is not implemented in <code>rgl</code></li>
+<li>Can export multiple figures and switch
+
+<ul>
+<li>Doesn&#39;t hold camera angle</li>
+<li>Current work</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>DTI Example</h2>
+  </hgroup>
+  <article>
+    <p><object data="./WebGL/index_dti.html" width="800" height="600"> <embed src="./WebGL/index_dti.html" width="800" height="600"> </embed> Error: Embedded data could not be displayed. </object></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>Why are we still 2D?</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li><p>We do exploratory data analysis / quality control mainly only in 2D</p></li>
+<li><p>Some investment in <span class="black>new software</span> - how many languages is enough!?</p></li>
+<li><p>3D Figures in <span class="black>Papers/Presentations</span> are not generally accepted</p>
+
+<ul>
+<li>&quot;Nice picture, but where&#39;s the figure for the paper&quot;</li>
+</ul></li>
+</ul>
+
+<!--- 
+* Software exists to embed 3D in <span class="black"><b>PDF</b></span> - but not as smooth for large data (See Levine JGCS paper for misc3d)
+-->
+
+<ul>
+<li>&quot;Tradition!&quot; [Stein <em>et. al.</em> (1964)]</li>
+</ul>
+
+<p><img src="Fiddler.gif" alt="Fiddler" height="200" width="200"></p>
+
+<p><span class="footnote"> Image from <a href="http://tvtropes.org/pmwiki/pmwiki.php/Theatre/FiddlerOnTheRoof?from=Main.FiddlerOnTheRoof">http://tvtropes.org/pmwiki/pmwiki.php/Theatre/FiddlerOnTheRoof?from=Main.FiddlerOnTheRoof</a></span></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>RGL Caveats</h2>
+  </hgroup>
+  <article>
+    <p>So RGL rendering is perfect, right?</p>
+
+<p><img src="html_screenshot.png" height="400" alt="Lot of code"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>RGL Caveats</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Size of gzipped NIfTI file : 418Kb, unzipped 4Mb</li>
+<li>Size of html output : 30Mb<br></li>
+<li>WebGL can only hold 65535 points in an object - need to break up 
+
+<ul>
+<li><a href="http://biostat.jhsph.edu/%7Ejmuschel/code/WebGL_Example.zip">http://biostat.jhsph.edu/~jmuschel/code/WebGL_Example.zip</a> has example of how to do this (thanks to Duncan Murdoch)</li>
+</ul></li>
+<li>Also hard to see what&#39;s going on in the html</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>Markdown - Use <code>R</code>!</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Integration into <code>knitr</code> is working - webgl hook
+
+<ul>
+<li>Exporting the html first, then embedding in html works fine</li>
+<li>RStudio&#39;s default doesn&#39;t open md&#39;s over 2Mb (brain was 30Mb)</li>
+</ul></li>
+<li><p><code>shiny</code> integration is possible, but slow depending on system</p>
+
+<ul>
+<li>Meta-Interactive? Interactive control over interactive graphics</li>
+</ul></li>
+<li><p><code>slidify</code> works with it (used in this presentation)</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>Conclusion</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Currently - very good for internal reports/EDA</li>
+<li>Can integrate into new knitting tools</li>
+<li>Not accepted as figures in publication in</li>
+<li>Need journals that can handle</li>
+<li>You can still include standard figures in text with supplemental material</li>
+<li>Available methods allow for reproducibility</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>Thanks</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Ciprian Craniceanu and Brian Caffo - SMART Group</li>
+<li>Elizabeth Sweeney </li>
+<li>Duncan Murdoch - otherwise I&#39;d still be presenting distorted brains</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>Biblio</h2>
+  </hgroup>
+  <article>
+    <p><p>Stein J, Jewison N, Topol, Crane N, Frey L, Picon M, Mann P, Morris O, Harnick S, Williams J and others (1964).
+<EM>Fiddler on the Roof</EM>.
+Crown.</p>
+
+<p><p>Boettiger C (2013).
+<EM>knitcitations: Citations for knitr markdown files</EM>.
+R package version 0.3-3, <a href="http://CRAN.R-project.org/package=knitcitations"><a href="http://CRAN.R-project.org/package=knitcitations">http://CRAN.R-project.org/package=knitcitations</a></a>.</p>
+
+<p><p>Xie Y (2013).
+<EM>knitr: A general-purpose package for dynamic report generation in
+R</EM>.
+R package version 1.1.4, <a href="http://yihui.name/knitr/"><a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a></a>.</p>
+
+<p><p>Feng D and Tierney L (2008).
+&ldquo;Computing and Displaying Isosurfaces in R.&rdquo;
+<EM>Journal of Statistical Software</EM>, <B>28</B>(1).
+<a href="http://www.jstatsoft.org/v28/i01/"><a href="http://www.jstatsoft.org/v28/i01/">http://www.jstatsoft.org/v28/i01/</a></a>.</p>
+
+<p><p>Whitcher B, Schmid VJ and Thornton A (2011).
+&ldquo;Working with the DICOM and NIfTI Data Standards in R.&rdquo;
+<EM>Journal of Statistical Software</EM>, <B>44</B>(6), pp. 1&ndash;28.
+<a href="http://www.jstatsoft.org/v44/i06/"><a href="http://www.jstatsoft.org/v44/i06/">http://www.jstatsoft.org/v44/i06/</a></a>.</p>
+
+<p><p>Adler D and Murdoch D (2013).
+&ldquo;rgl: 3D visualization device system (OpenGL).&rdquo;
+R package version 0.93.928, <a href="http://CRAN.R-project.org/package=rgl"><a href="http://CRAN.R-project.org/package=rgl">http://CRAN.R-project.org/package=rgl</a></a>.</p>
+
+<p><p>RStudio (2013).
+&ldquo;RStudio: Integrated development environment for R (Version 0.97.320).&rdquo;
+[Computer software]. Retrieved March 6, 2013.
+<a href="http://www.rstudio.org/"><a href="http://www.rstudio.org/">http://www.rstudio.org/</a></a>.</p>
+
+<p><p>Vaidyanathan R (2012).
+<EM>slidify: Generate reproducible html5 slides from R markdown</EM>.
+R package version 0.3.3, <a href="http://ramnathv.github.com/slidify/"><a href="http://ramnathv.github.com/slidify/">http://ramnathv.github.com/slidify/</a></a>.</p>
+
+<p><p>Sweeney E, Shinohara R, Shea C, Reich D and Crainiceanu C (2012).
+&ldquo;Automatic Lesion Incidence Estimation and Detection in Multiple Sclerosis
+Using Multisequence Longitudinal MRI.&rdquo;
+<EM>American Journal of Neuroradiology</EM>.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>Slicer</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>GUI-based interface:</li>
+</ul>
+
+<p><img src="Slicer.png" alt="Slicer" height="500" width="1000"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>Slicer Example</h2>
+  </hgroup>
+  <article>
+    <p>From <a href="https://github.com/xtk/SlicerWebGLExport/blob/master/README.md"><a href="https://github.com/xtk/SlicerWebGLExport/blob/master/README.md">https://github.com/xtk/SlicerWebGLExport/blob/master/README.md</a></a>.  Shows exportability. </p>
+
+<p>(Left 3D Slicer, Right - Google Chrome)</p>
+
+<p><img src="Slicer_Example_web.png" height="400" width="700" alt="Example of web rendering"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+
+  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+<!-- Grab CDN jQuery, fall back to local if offline -->
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery-1.7.min.js"><\/script>')</script>
+<!-- Load Javascripts for Widgets -->
+<!-- Google Prettify -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script src='libraries/highlighters/prettify/js/lang-r.js'></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+</script>
+<!-- End Google Prettify --></html>

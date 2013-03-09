@@ -1,0 +1,292 @@
+\documentclass[10pt,a4paper]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{array}
+
+\usetheme{Bergen}
+\usepackage{multirow, hyperref, enumerate}
+\title{Visualizing Brain Imaging in Interactive 3D}
+
+\subtitle{} % (optional)
+
+\author{John Muschelli}
+
+\date{\today}
+
+<<>>=
+
+## @knitr label=setup, echo=FALSE
+rm(list=ls())
+library(rgl)
+library(misc3d)
+library(oro.dicom)
+library(AnalyzeFMRI)
+library(knitr)
+rootdir <- "/Users/muschellij2/Dropbox/3DPDF_Example"
+outdir <- file.path(rootdir, "Presentation")
+homedir <- file.path(rootdir, "Paper")
+datadir <- file.path(homedir, "data")
+progdir <- file.path(homedir, "programs")
+resdir <- file.path(homedir, "results")
+source(file.path(progdir, "asy.R"))
+source(file.path(progdir, "writeWebGL_split.R"))
+
+
+## @knitr label=Makefig
+### Template from MNI152 from FSL
+setwd(datadir)
+template <- f.read.nifti.volume("MNI152_T1_2mm_brain.nii")
+template <- template[,,,1]
+cut <- 3500
+
+dtemp <- dim(template)
+brain <- contour3d(template, x=1:dtemp[1], y=1:dtemp[2], z=1:dtemp[3], level = cut, alpha = 0.15, draw = FALSE)
+
+### this would be the ``activation'' or surface you want to render 
+### here just taking the upper WM from the template image
+activation <- contour3d(template, level = c(8200, 8250), alpha = c(0.5, 0.8), add = TRUE, color=c("yellow", "red"), draw=FALSE)
+
+scene <- list(brain, activation)
+
+## @knitr label=WebGL, echo=FALSE, results='hide', cache=TRUE
+drawScene.rgl(scene)
+text3d(x=dtemp[1]/2, y=dtemp[2]/2, z = dtemp[3]*0.98, text="Top")
+text3d(x=dtemp[1]*0.98, y=dtemp[2]/2, z = dtemp[3]/2, text="Right")
+
+
+### render this on the web!
+index <- writeWebGL_split(dir=file.path(outdir, "webGL"), width=600, height=600)
+#browseURL(paste("file://", , 
+#          width=500), sep=""))
+@
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+Functional brain imaging (e.g. fMRI, PET, EEG) data is a 4-dimensional time series representing changes in brain activity over time.  
+
+Structrual imaging (e.g. MPRAGE, DTI, CT) also has been increasingly more common to have a longitudinal component, where participants/subjects are scanned multiple times. 
+
+Visualization and presentation of these data can be improved with the use of 3D tools.
+
+
+NEEDED: pictures of brains - a lot - DTI ex, MRI
+
+\end{frame}
+
+\begin{frame}{2D vs. 3D}
+2D Picture
+\end{frame}
+
+\begin{frame}{2D vs. 3D}
+3D Picture
+\end{frame}
+
+\begin{frame}
+What kind of data do we have?
+\begin{itemize}
+\item Structural MRIs
+\item Functional MRIs
+\item CT
+\item DTI
+\item EEG
+\item PET
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Current methods of visualizing/EDA}
+% for functional/longitudinal structural images:
+\begin{itemize}
+\item Time series of individual voxels/regions of interest (ROI)
+\item Look at data by slice over time
+\item Look at data cross-sectionally within slice
+\end{itemize}
+Overall, most methods keep temporal or 2D spatial components fixed and vary the other.
+\end{frame}
+
+\begin{frame}{How do we view results:}
+\begin{itemize}
+\item Time series of individual voxels/regions of interest (ROI)
+\item Look at a subset of cross-sectional slices over time 
+\item Present spatial map summarizing temporal information
+\begin{itemize}
+\item Projection, mean, differrence
+\item Statistical Parametric Map (SPM) - Color as ``activation level''
+\end{itemize}
+\end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Why use this for EDA}
+\begin{itemize}
+\item Respects true nature of data (brains are not slices!)
+\item Can get more of an overview
+\item Motion - can look and interact to see if there are problems
+\item Some things become more apparent in 3D
+\end{itemize}
+ 
+\end{frame}     
+
+
+
+\begin{frame}{Things Hiding in 2D}
+Real Life Example:
+
+SubLIME is a MS lesion detection algorithm \cite{sublime}.  
+  MS - SUBLIME
+  - before 3D rendering - didn't notice misregistration
+\end{frame}
+
+\begin{frame}{Why are we still 2D?}
+\begin{itemize}
+\item We do EDA mainly only in 2D
+\item Some investment in new software - how many languages is enough!?
+\item 3D Figures in Papers/Presentations are not generally accepted
+\begin{itemize}
+\item Software exists to embed 3D in pdf - but not as smooth for large data
+\item ``Tradition!'' \cite{fiddler}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{What makes a good figure}
+  - 3-4D Interactive
+  - Easy to use
+  - quick to render
+  - Transparency (opacity) - subcortical structures
+  - No (or very limited) 3rd Party software
+  (Note - curent figures do not have all these qualities )
+\end{frame}
+
+\begin{frame}{3D rendering tools}
+\begin{itemize}
+\item 3D Slicer - \url{http://www.slicer.org/}
+\item Paraview - \url{http://www.paraview.org/}
+\item RGL \cite{rgl} using \texttt{R} - \url{http://cran.r-project.org/}
+\item Freesurfer - \url{http://surfer.nmr.mgh.harvard.edu/}
+\item AFNI - \url{http://afni.nimh.nih.gov/afni}
+\item MIPAV - \url{http://mipav.cit.nih.gov/}
+\item Matlab, etc.
+\end{itemize}  
+\end{frame}
+
+\begin{frame}
+RGL - Use R!
+\begin{itemize}
+\item Why choose as the main tool? (Other than the fact I'm at a statistics conference)
+\item Open - source (read Free)
+\item REPRODUCIBLE (R Markdown as Hadley will discuss)
+\item Scriptable
+\item Exportable
+\item It works (I've seen it!)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+\begin{itemize}
+\item Currently - very good for internal reports/EDA
+\item Not accepted as figures in publication
+\item Need journals that can handle
+\item You can still include snapshots 
+\item Available methods allow for reproducibility
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \titlepage
+  \only<article>{\maketitle}
+\end{frame}
+
+\begin{frame}{What's the problem}%{Subtitles are optional.}
+\begin{itemize}
+\item With the explosion of high dimensional data
+\item Areas - genomics, neuroscience, astronomy (not astrology), large networks
+\item Focus - 4D data, and specifically neuroscience 
+\item Currently - show orthogonal slices with colors proportional to intensity - ``flat brains''
+\begin{itemize}
+\item Have alpha blending
+\end{itemize}
+\item Have no ``hurdle'' with software
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Overall Goals
+\begin{itemize} 
+\item Why we need them
+\item Why we should push for them to be done
+  \item Journal
+\item Discuss how to make these figure
+\end{itemize} 
+\end{frame}
+
+\begin{frame}{What do we want it to do?}%{Subtitles are optional.}
+\begin{itemize}
+\item Have 2D presents - colors, shapes, axes
+\item Be able to be manipulated/rotated
+\item Present multiple meshes
+\begin{itemize}
+\item Have alpha blending
+\end{itemize}
+\item Have no ``hurdle'' with downloading software for end users
+\end{itemize}
+\end{frame}
+
+\begin{frame}{What are the options for rendering?}%{Subtitles are optional.}
+\begin{table}[h]
+	\begin{tabular}{c|m{1in}|m{1in}|}
+	\hline
+	Software & Pros & Cons \\
+	Slicer & Lightweight rendering, export to multiple formats & Python Scripting (Pro?) \\
+	Slicer & & Import all types of formats \\
+	Paraview & Lightweight Rendering & \\
+	Paraview & Lightweight Rendering & Import all types of formats \\
+	RGL, WebGL, OpenGL & & Scripting (Pro?) \\
+	MeshLab & Converts Multiple formats & Not easy alpha blending, Not much brain data import \\
+	Asymptote &  & Scripting language \\
+	Adobe Presenter &  & Cost \\
+	\hline
+	\end{tabular}
+\end{table}
+\end{frame}
+%
+\begin{frame}{Where to Render}%{Subtitles are optional.}
+\begin{table}
+{\scriptsize
+	\begin{tabular}{c|m{0.5in}|c|}
+	\hline
+	& Pros & Cons \\
+	\multirow{3}{*}{Web} &  & Need Internet \\
+	& Updatable  &  Not linked to paper\\
+	& Many tools available & Some html may be required \\
+	& & \\ \hline
+	\multirow{3}{*}{PDF} & Embedded all in one document - linked  & Need Adobe\\
+	& Embedded all in one document & Only certain format (u3d, prc, etc) \\
+	&  & Javascript may be possible \\
+	\hline
+	\end{tabular}
+}
+\end{table}
+\end{frame}
+
+\begin{frame}{Problems}%{Subtitles are optional.}
+\begin{itemize}
+\item We're not movie directors: Camera angle/position may convey the wrong idea
+\end{itemize}
+\end{frame}
+
+Here are the steps.
+Need a structure
+4D - over time or multiple ROIs
+
+\bibliographystyle{plain}
+\bibliography{../Paper/Paper_ENAR_Visualization}
+\end{document}
