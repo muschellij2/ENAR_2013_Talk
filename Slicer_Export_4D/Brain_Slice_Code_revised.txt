@@ -1,0 +1,91 @@
+		
+		  function highlight(what) {
+		    
+		    document.getElementById('all').style.backgroundColor = '#000000';
+		    document.getElementById('ROIS').style.backgroundColor = '#000000';
+		    document.getElementById('brains').style.backgroundColor = '#000000';
+		    
+		    document.getElementById(what).style.backgroundColor = '#736AFF';
+		    
+		  };
+
+		  function show(whatstring, opac) {
+		        
+		    // highlight the div
+		    //    highlight(whatstring); 
+		    
+		    if (whatstring == 'all') {		      
+		      
+		      // show everything
+		      scene.opacity = opac;
+		      scene.visible = true;
+		      
+		    } else {
+		      
+		      // show specific anatomy
+          		what = eval(whatstring);
+		        what.opacity = opac;
+		        what.visible = true;     
+ 			console.log("what = " + what);
+			    
+		    }
+		    
+		  };
+		  
+
+		  
+		  function toggleCheckBox() {
+		    
+		    document.getElementById('showOverlay').checked = !document.getElementById('showOverlay').checked;		    
+		    
+		  };
+		  
+        function printValue(sliderID, textbox) {
+            var x = document.getElementById(textbox);
+            var y = document.getElementById(sliderID);
+            x.value = y.value;
+        };
+
+		  function show2(sliderID, textbox) {
+	            var x = document.getElementById(textbox);
+	            var y = document.getElementById(sliderID);
+		    val = y.value;
+			console.log("scene = " + scene);
+			//scene.opacity = 0;
+/*
+			console.log("brains[1] = " + brains[1]);
+			brains.visible = true;
+			console.log("brains = " + brains);
+			show(brains, 0.5);
+*/
+			for (o in ROIS) {
+				o = eval(ROIS[o]);
+				o.visible = false;
+				o.opacity = 1.0;
+			}
+
+			//show(brains, 0.5);
+			low = Math.floor(val);
+			op_low = 1 - (val - low);
+			chosen = ROIS[low];
+		        show(chosen, op_low);
+			console.log("low = " + chosen);
+			console.log("op_low = " + op_high);
+/*
+			for (o in ROIS) {
+				console.log("o = ", o);
+			}
+*/
+
+			high = Math.ceil(val);
+
+			op_high = val - low;
+			chosen = ROIS[high];
+			x.value = chosen;
+			show(chosen, op_high);
+			console.log("high = " + chosen);
+			console.log("op_high = " + op_high);
+
+		};
+
+		

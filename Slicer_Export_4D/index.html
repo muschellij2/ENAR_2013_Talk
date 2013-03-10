@@ -1,0 +1,66 @@
+
+<html>
+<!-- WebGL Export for 3D Slicer4 powered by XTK -- http://goXTK.com -->
+  <head>
+    <title>WebGL Export</title>
+    <script type="text/javascript" src="http://get.goXTK.com/xtk_edge.js"></script>
+    <script type="text/javascript">
+      var run = function() {
+
+        renderer0 = new X.renderer3D();
+        renderer0.container = 'r0';
+        renderer0.init();
+
+        scene = new X.object();
+        vtkMRMLModelNode4 = new X.mesh();
+        vtkMRMLModelNode4.file = 'Brain_Model.vtk';
+        vtkMRMLModelNode4.color = [0.5, 0.5, 0.5];
+        vtkMRMLModelNode4.opacity = 0.16;
+        vtkMRMLModelNode4.visible = true;
+        vtkMRMLModelNode4.caption = 'Brain_Model';
+        scene.children.push(vtkMRMLModelNode4);
+
+        vtkMRMLModelHierarchyNode1 = new X.object();
+        scene.children.push(vtkMRMLModelHierarchyNode1);
+
+        vtkMRMLModelNode5 = new X.mesh();
+        vtkMRMLModelNode5.file = 'ROI_7900_thresh.vtk';
+        vtkMRMLModelNode5.color = [0.95686300000000002, 0.83921599999999996, 0.19215699999999999];
+        vtkMRMLModelNode5.opacity = 0.43;
+        vtkMRMLModelNode5.visible = true;
+        vtkMRMLModelNode5.caption = 'ROI_7900_thresh';
+        vtkMRMLModelHierarchyNode1.children.push(vtkMRMLModelNode5);
+
+        vtkMRMLModelNode6 = new X.mesh();
+        vtkMRMLModelNode6.file = 'ROI_7800_thresh.vtk';
+        vtkMRMLModelNode6.color = [0.66666700000000001, 0.98039200000000004, 0.98039200000000004];
+        vtkMRMLModelNode6.opacity = 0.37;
+        vtkMRMLModelNode6.visible = true;
+        vtkMRMLModelNode6.caption = 'ROI_7800_thresh';
+        vtkMRMLModelHierarchyNode1.children.push(vtkMRMLModelNode6);
+
+        vtkMRMLModelNode7 = new X.mesh();
+        vtkMRMLModelNode7.file = 'ROI_8000_thresh.vtk';
+        vtkMRMLModelNode7.color = [0.73725499999999999, 0.25490200000000002, 0.109804];
+        vtkMRMLModelNode7.opacity = 0.42;
+        vtkMRMLModelNode7.visible = true;
+        vtkMRMLModelNode7.caption = 'ROI_8000_thresh';
+        vtkMRMLModelHierarchyNode1.children.push(vtkMRMLModelNode7);
+
+
+
+        renderer0.add(scene);
+        renderer0.camera.position = [0.0, 500.0, 0.0];
+        renderer0.camera.up = [0.0, 0.0, 1.0];
+        renderer0.render();
+
+
+
+      };
+    </script>
+  </head>
+  <body style="margin:0px; padding:0px;" onload="run()">
+        <div id="r0" style="background-color: #c1c3e8;; width: 100%; height: 100%;"></div>
+
+  </body>
+</html>

@@ -1,0 +1,29 @@
+function GetSelectedItem() {
+
+	chosen = ""
+	len = document.f1.r1.length
+	
+	for (i = 0; i <len; i++) {
+		check = document.f1.r1[i].value
+		console.log("check = " + check);
+
+        	    o = eval(check);
+	            o.visible = false;
+		
+		if (document.f1.r1[i].checked) {
+			chosen = document.f1.r1[i].value
+		}
+	}
+	
+	if (chosen == "") {
+		alert("No Location Chosen")
+	}
+	else {
+            o = eval(chosen);
+            o.visible = true;
+            o.opacity = 1;
+		console.log("o = " + o);
+		console.log("o.opacity = " + o.opacity);
+
+	}
+}
