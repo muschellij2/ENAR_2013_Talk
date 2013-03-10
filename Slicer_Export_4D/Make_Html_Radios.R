@@ -128,8 +128,8 @@ paste(brains[1], '.visible = true;', sep=""),
 	#printValue('slider2','rangeValue2');
 	top <- nrow(info)-1
 	step <- top/ 100
-	addmore <- c(addmore, paste('<input id="slider2" type="range" min="0" max="', top, '" step="', step, "\" value=\"0\" onchange=\" show2('slider2','rangeValue2');\"/>", sep=""), '<input id="rangeValue2" type="text" size="10"/>')
-	addmore <- c(addmore, paste('<input id="slider_brain" type="range" min="0.01" max="0.99" step="', 0.01, "\" value=\"0.50\" onchange=\"opac_brain('slider_brain','range_brain');\"/>", sep=""), '<input id="range_brain" type="text" size="10"/>')
+#	addmore <- c(addmore, paste('<input id="slider2" type="range" min="0" max="', top, '" step="', step, "\" value=\"0\" onchange=\" show2('slider2','rangeValue2');\"/>", sep=""), '<input id="rangeValue2" type="text" size="10"/>')
+	addmore <- c(addmore, paste('Brain Alpha Blending Slider <input id="slider_brain" type="range" min="0.01" max="0.99" step="', 0.01, "\" value=\"0.50\" onchange=\"opac_brain('slider_brain','range_brain');\"/>", sep=""), '<input id="range_brain" type="text" size="10"/>')
 	# addmore <- c(addmore, "<script type=\"text/javascript\"> show2('slider2','rangeValue2') </script>")
 	dat <- dat$dat
 	
