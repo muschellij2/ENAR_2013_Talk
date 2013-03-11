@@ -2,6 +2,7 @@
 # ENAR_Visualization.html - slide deck
 # Made with slidify_0.3.3, knitcitations_0.3-3, knitr_1.1.4, RStudio 0.97.320
 # repo to make RGL object: https://github.com/muschellij2/RGL_Export
+## slide.R - quick wrapper to slidify the code and then system("open")
 
 ### SLICER Export
 ## 2013-03-05-Scene.mrml - scene - load it up in slicer

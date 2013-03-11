@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visualizing Brain Imaging in Interactive 3D Extra slides</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Visualizing Brain Imaging in Interactive 3D Extra slides">
+  <meta name="author" content="@StrictlyStat (github: muschellij2)">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/hemisu-dark.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+    
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+    <!-- END LOGO SLIDE -->
+    
+
+    <!-- TITLE SLIDE -->
+    <!-- Should I move this to a Local Layout File? -->
+    <slide class="title-slide segue nobackground">
+      <hgroup class="auto-fadein">
+        <h1>Visualizing Brain Imaging in Interactive 3D Extra slides</h1>
+        <h2>John Muschelli  (ENAR 2013)</h2>
+        <p>@StrictlyStat (github: muschellij2)<br/>Johns Hopkins Bloomberg School of Public Health</p>
+      </hgroup>
+          </slide>
+
+    <!-- SLIDES -->
+      <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Slicer</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>GUI-based interface:</li>
+</ul>
+
+<p><img src="Slicer.png" alt="Slicer" height="500" width="1000"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Slicer Example</h2>
+  </hgroup>
+  <article>
+    <p>From <a href="https://github.com/xtk/SlicerWebGLExport/blob/master/README.md"><a href="https://github.com/xtk/SlicerWebGLExport/blob/master/README.md">https://github.com/xtk/SlicerWebGLExport/blob/master/README.md</a></a>.  Shows exportability. </p>
+
+<p>(Left 3D Slicer, Right - Google Chrome)</p>
+
+<p><img src="Slicer_Example_web.png" height="400" width="700" alt="Example of web rendering"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Pros of Using Slicer</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>GUI interface - can change opacity/measures interactively WSIWYG-ish</li>
+<li>Can make <b>exportable</b> (to html) figures</li>
+<li>Can incorporate into 4D - but not &quot;out of the box&quot; - have to add on javascript </li>
+<li>Has many capabilities</li>
+<li>Scripting interface (I&#39;ve never used) using <code>Python</code></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>More addons in <code>R</code>/Explanation?</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>RGL - <code>R</code> adaptation of OpenGL</li>
+<li>Has 3d extensions of many functions: <code>plot3d</code>, <code>hist3d</code>, <code>text3d</code>, etc.</li>
+<li>misc3d package [ Feng &amp; Tierney (2008) ] - add ons to this and allows for contours</li>
+<li><code>writeWebGL</code> - <code>rgl</code> function that allows you to write to webGL</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Things Hiding in 2D</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li><p>Real Life Example:</p></li>
+<li><p>SubLIME is a MS lesion detection algorithm [Sweeney <em>et. al.</em> 2012].  </p></li>
+<li><p>MS - SUBLIME</p></li>
+<li><p>before 3D rendering - didn&#39;t notice misregistration</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Moving through Space <span class="black"><b>and</b></span> Time!</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Look at data by slice over time 
+
+<ul>
+<li>Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis</li>
+</ul></li>
+</ul>
+
+<p><img src="figure/lightbox2.png" alt="plot of chunk lightbox2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>RGL Caveats</h2>
+  </hgroup>
+  <article>
+    <p>So RGL rendering is perfect, right?</p>
+
+<p><img src="html_screenshot.png" height="400" alt="Lot of code"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>RGL Caveats</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Size of gzipped NIfTI file : 418Kb, unzipped 4Mb</li>
+<li>Size of html output : 30Mb<br></li>
+<li>WebGL can only hold 65535 points in an object - need to break up 
+
+<ul>
+<li><a href="http://biostat.jhsph.edu/%7Ejmuschel/code/WebGL_Example.zip">http://biostat.jhsph.edu/~jmuschel/code/WebGL_Example.zip</a> has example of how to do this (thanks to Duncan Murdoch)</li>
+</ul></li>
+<li>Also hard to see what&#39;s going on in the html</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>DTI Example</h2>
+  </hgroup>
+  <article>
+    <p><object data="./WebGL/index_dti.html" width="800" height="600"> <embed src="./WebGL/index_dti.html" width="800" height="600"> </embed> Error: Embedded data could not be displayed. </object></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+
+  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+<!-- Grab CDN jQuery, fall back to local if offline -->
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery-1.7.min.js"><\/script>')</script>
+<!-- Load Javascripts for Widgets -->
+<!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+</html>

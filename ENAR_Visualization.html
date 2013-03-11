@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="libraries/frameworks/io2012/phone.css" 
     media="only screen and (max-device-width: 480px)" >
   <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
-  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/hemisu-dark.css" />
+  <link rel="stylesheet" href="libraries/highlighters/prettify/css/hemisu-dark.css" />
   <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
   <script data-main="libraries/frameworks/io2012/js/slides" 
     src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
@@ -55,6 +55,7 @@
 <li><p>Worked in fMRI/CT for last 4 years</p></li>
 <li><p>Part of the <span class="black"><b>SMART group</b></span>, and ADHD-200 competition winners</p></li>
 <li><p><a href="http://biostat.jhsph.edu/%7Ejmuschel/">http://biostat.jhsph.edu/~jmuschel/</a></p></li>
+<li><p>Talk hosted at <a href="https://github.com/muschellij2/ENAR_2013_Talk">https://github.com/muschellij2/ENAR_2013_Talk</a></p></li>
 </ul>
 
   </article>
@@ -174,6 +175,7 @@
 <li>AFNI - <a href="http://afni.nimh.nih.gov/afni">http://afni.nimh.nih.gov/afni</a></li>
 <li>MIPAV - <a href="http://mipav.cit.nih.gov/">http://mipav.cit.nih.gov/</a></li>
 <li>Matlab</li>
+<li><a href="http://slicedrop.com/">http://slicedrop.com/</a> - TRY THIS</li>
 <li>Many more</li>
 </ul>
 
@@ -202,8 +204,11 @@
     <h2>Current methods of visualizing/EDA</h2>
   </hgroup>
   <article>
-    <ul>
-<li>Time series of individual voxels/regions of interest (ROI) <span class="black"><b>Keep 2D</b></span></li>
+    <!---
+* Time series of individual voxels/regions of interest (ROI) <span class="black"><b>Keep 2D</b></span>
+-->
+
+<ul>
 <li>Look at data cross-sectionally (&quot;Lightbox&quot;)</li>
 </ul>
 
@@ -294,30 +299,6 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
 
       <slide class="" id="slide-14" style="background:;">
   <hgroup>
-    <h2>Moving through Space <span class="black"><b>and</b></span> Time!</h2>
-  </hgroup>
-  <article>
-    <p><img src="238-4136_Thumbnails.png" style="width:780px; height:540px; center;" alt="Lot of code" ></p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-15" style="background:;">
-  <hgroup>
-    <h2>Slicer Example - WebGL export - CT Data</h2>
-  </hgroup>
-  <article>
-    <p><video width="900" height="580" controls>
-  <source src="Slicer_Example.mp4" type="video/mp4" loop="true">
-</video></p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-16" style="background:;">
-  <hgroup>
     <h2>What (I think) makes a good interactive neuroimaging figure</h2>
   </hgroup>
   <article>
@@ -336,38 +317,31 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
+      <slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Moving through Space <span class="black"><b>and</b></span> Time!</h2>
+  </hgroup>
+  <article>
+    <p><img src="238-4136_Thumbnails.png" style="width:780px; height:540px; center;" alt="Lot of code" ></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Slicer Example - WebGL export - CT Data</h2>
+  </hgroup>
+  <article>
+    <p><video width="900" height="580" controls>
+  <source src="Slicer_Example.mp4" type="video/mp4" loop="true">
+</video></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
       <slide class="" id="slide-17" style="background:;">
-  <hgroup>
-    <h2>DTI Example</h2>
-  </hgroup>
-  <article>
-    <p><object data="./WebGL/index_dti.html" width="800" height="600"> <embed src="./WebGL/index_dti.html" width="800" height="600"> </embed> Error: Embedded data could not be displayed. </object></p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-18" style="background:;">
-  <hgroup>
-    <h2>Where&#39;s my 4D?</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>Currently 4D is not implemented in <code>rgl</code></li>
-<li>Can export multiple figures and switch
-
-<ul>
-<li>Doesn&#39;t hold camera angle</li>
-<li>Current research work
-*** Where&#39;s the beef?</li>
-</ul></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Why are we still 2D?</h2>
   </hgroup>
@@ -398,7 +372,7 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-20" style="background:;">
+      <slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Markdown - Use <code>R</code>!</h2>
   </hgroup>
@@ -422,7 +396,30 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-21" style="background:;">
+      <slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Where&#39;s my 4D?</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Currently 4D is not implemented in <code>rgl</code></li>
+<li>Can export multiple figures and switch back in forth like Slicer Example
+
+<ul>
+<li>Doesn&#39;t hold camera angle</li>
+<li>Current research work - next few months</li>
+</ul></li>
+</ul>
+
+<p><img src="Wheres-the-Beef1.jpg" alt="Fiddler" height="200" width="200"></p>
+
+<p><hr noshade size=1> Image from <a href="http://blogs.citrix.com/2012/09/19/wheres-the-beef/wheres-the-beef-2/">http://blogs.citrix.com/2012/09/19/wheres-the-beef/wheres-the-beef-2/</a></hr></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>Conclusion</h2>
   </hgroup>
@@ -432,15 +429,15 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
 <li><code>R</code> has a good interface - other tools are available</li>
 <li>Currently - good for internal reports/<span class="black"><b>EDA</b></span></li>
 <li><span class="black"><b>Not accepted</b></span> as figures - but supplemental material</li>
-<li><span class="black"><b>More use</b></span> - better tools and more acceptance</li>
-<li>Can be done for all <code>rgl</code> objects, but use with <span class="black"><b>caution</b></span></li>
+<li><p><span class="black"><b>More use</b></span> - better tools and more acceptance</p></li>
+<li><p>Note: Exporting can be done for all <code>rgl</code> objects, but use with <span class="black"><b>caution</b></span> - I am not condoning wild 4D exploding pie charts</p></li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-22" style="background:;">
+      <slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Thanks</h2>
   </hgroup>
@@ -457,7 +454,7 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-23" style="background:;">
+      <slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>Biblio</h2>
   </hgroup>
@@ -475,11 +472,6 @@ R package version 0.3-3, <a href="http://CRAN.R-project.org/package=knitcitation
 <EM>knitr: A general-purpose package for dynamic report generation in
 R</EM>.
 R package version 1.1.4, <a href="http://yihui.name/knitr/"><a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a></a>.</p>
-
-<p><p>Feng D and Tierney L (2008).
-&ldquo;Computing and Displaying Isosurfaces in R.&rdquo;
-<EM>Journal of Statistical Software</EM>, <B>28</B>(1).
-<a href="http://www.jstatsoft.org/v28/i01/"><a href="http://www.jstatsoft.org/v28/i01/">http://www.jstatsoft.org/v28/i01/</a></a>.</p>
 
 <p><p>Whitcher B, Schmid VJ and Thornton A (2011).
 &ldquo;Working with the DICOM and NIfTI Data Standards in R.&rdquo;
@@ -499,147 +491,8 @@ R package version 0.93.928, <a href="http://CRAN.R-project.org/package=rgl"><a h
 <EM>slidify: Generate reproducible html5 slides from R markdown</EM>.
 R package version 0.3.3, <a href="http://ramnathv.github.com/slidify/"><a href="http://ramnathv.github.com/slidify/">http://ramnathv.github.com/slidify/</a></a>.</p>
 
-<p><p>Sweeney E, Shinohara R, Shea C, Reich D and Crainiceanu C (2012).
-&ldquo;Automatic Lesion Incidence Estimation and Detection in Multiple Sclerosis
-Using Multisequence Longitudinal MRI.&rdquo;
-<EM>American Journal of Neuroradiology</EM>.</p>
-
 <h2></span></h2>
 
-<h2>Slicer</h2>
-
-<ul>
-<li>GUI-based interface:</li>
-</ul>
-
-<p><img src="Slicer.png" alt="Slicer" height="500" width="1000"></p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-24" style="background:;">
-  <hgroup>
-    <h2>Slicer Example</h2>
-  </hgroup>
-  <article>
-    <p>From <a href="https://github.com/xtk/SlicerWebGLExport/blob/master/README.md"><a href="https://github.com/xtk/SlicerWebGLExport/blob/master/README.md">https://github.com/xtk/SlicerWebGLExport/blob/master/README.md</a></a>.  Shows exportability. </p>
-
-<p>(Left 3D Slicer, Right - Google Chrome)</p>
-
-<p><img src="Slicer_Example_web.png" height="400" width="700" alt="Example of web rendering"></p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-25" style="background:;">
-  <hgroup>
-    <h2>Pros of Using Slicer</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>GUI interface - can change opacity/measures interactively WSIWYG-ish</li>
-<li>Can make <b>exportable</b> (to html) figures</li>
-<li>Can incorporate into 4D - but not &quot;out of the box&quot; - have to add on javascript </li>
-<li>Has many capabilities</li>
-<li>Scripting interface (I&#39;ve never used) using <code>Python</code></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-26" style="background:;">
-  <hgroup>
-    <h2>More addons in <code>R</code>/Explanation?</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>RGL - <code>R</code> adaptation of OpenGL</li>
-<li>Has 3d extensions of many functions: <code>plot3d</code>, <code>hist3d</code>, <code>text3d</code>, etc.</li>
-<li>misc3d package [ Feng &amp; Tierney (2008) ] - add ons to this and allows for contours</li>
-<li><code>writeWebGL</code> - <code>rgl</code> function that allows you to write to webGL</li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-27" style="background:;">
-  <hgroup>
-    <h2>Things Hiding in 2D</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li><p>Real Life Example:</p></li>
-<li><p>SubLIME is a MS lesion detection algorithm [Sweeney <em>et. al.</em> 2012].  </p></li>
-<li><p>MS - SUBLIME</p></li>
-<li><p>before 3D rendering - didn&#39;t notice misregistration</p></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-28" style="background:;">
-  <hgroup>
-    <h2>Moving through Space <span class="black"><b>and</b></span> Time!</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>Look at data by slice over time 
-
-<ul>
-<li>Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis</li>
-</ul></li>
-</ul>
-
-<p><img src="figure/lightbox2.png" alt="plot of chunk lightbox2"> </p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-29" style="background:;">
-  <hgroup>
-    <h2>RGL Caveats</h2>
-  </hgroup>
-  <article>
-    <p>So RGL rendering is perfect, right?</p>
-
-<p><img src="html_screenshot.png" height="400" alt="Lot of code"></p>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-30" style="background:;">
-  <hgroup>
-    <h2>RGL Caveats</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>Size of gzipped NIfTI file : 418Kb, unzipped 4Mb</li>
-<li>Size of html output : 30Mb<br></li>
-<li>WebGL can only hold 65535 points in an object - need to break up 
-
-<ul>
-<li><a href="http://biostat.jhsph.edu/%7Ejmuschel/code/WebGL_Example.zip">http://biostat.jhsph.edu/~jmuschel/code/WebGL_Example.zip</a> has example of how to do this (thanks to Duncan Murdoch)</li>
-</ul></li>
-<li>Also hard to see what&#39;s going on in the html</li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-31" style="background:;">
-  <hgroup>
-    
-  </hgroup>
-  <article>
-    
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -658,8 +511,14 @@ Using Multisequence Longitudinal MRI.&rdquo;
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
 <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery-1.7.min.js"><\/script>')</script>
 <!-- Load Javascripts for Widgets -->
-<!-- LOAD HIGHLIGHTER JS FILES -->
-<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<!-- DONE LOADING HIGHLIGHTER JS FILES -->
-</html>
+<!-- Google Prettify -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script src='libraries/highlighters/prettify/js/lang-r.js'></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+</script>
+<!-- End Google Prettify --></html>

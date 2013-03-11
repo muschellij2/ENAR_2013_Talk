@@ -4,7 +4,7 @@ subtitle    : John Muschelli  (ENAR 2013)
 author      : "@StrictlyStat (github: muschellij2)" 
 job         : Johns Hopkins Bloomberg School of Public Health
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
-highlighter : highlight.js  # {highlight.js, prettify, highlight}
+highlighter : prettify  # {highlight.js, prettify, highlight}
 hitheme     : hemisu-dark      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
@@ -37,6 +37,8 @@ mode        : selfcontained # {standalone, draft}
 * Part of the <span class="black"><b>SMART group</b></span>, and ADHD-200 competition winners
 
 * http://biostat.jhsph.edu/~jmuschel/
+
+* Talk hosted at https://github.com/muschellij2/ENAR_2013_Talk
 
 ---
 
@@ -114,6 +116,7 @@ What kind of data do we have?
 * AFNI - http://afni.nimh.nih.gov/afni
 * MIPAV - http://mipav.cit.nih.gov/
 * Matlab
+* http://slicedrop.com/ - TRY THIS
 * Many more
 
 ---
@@ -134,7 +137,9 @@ What kind of data do we have?
 
 ## Current methods of visualizing/EDA
 
+<!---
 * Time series of individual voxels/regions of interest (ROI) <span class="black"><b>Keep 2D</b></span>
+-->
 * Look at data cross-sectionally ("Lightbox")
 
 
@@ -205,19 +210,6 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 ---
 
 
-## Moving through Space <span class="black"><b>and</b></span> Time!
-
-<img src="238-4136_Thumbnails.png" style="width:780px; height:540px; center;" alt="Lot of code" >
-
----
-
-## Slicer Example - WebGL export - CT Data
-
-<video width="900" height="580" controls>
-  <source src="Slicer_Example.mp4" type="video/mp4" loop="true">
-</video>
-
----
 
 
 ## What (I think) makes a good interactive neuroimaging figure
@@ -240,24 +232,20 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 
 
 
-## DTI Example 
+## Moving through Space <span class="black"><b>and</b></span> Time!
 
-<object data="./WebGL/index_dti.html" width="800" height="600"> <embed src="./WebGL/index_dti.html" width="800" height="600"> </embed> Error: Embedded data could not be displayed. </object>
-
-----
-
-
-## Where's my 4D?
-
-* Currently 4D is not implemented in `rgl`
-* Can export multiple figures and switch
-  * Doesn't hold camera angle
-  * Current research work
-*** Where's the beef?
+<img src="238-4136_Thumbnails.png" style="width:780px; height:540px; center;" alt="Lot of code" >
 
 ---
 
- 
+## Slicer Example - WebGL export - CT Data
+
+<video width="900" height="580" controls>
+  <source src="Slicer_Example.mp4" type="video/mp4" loop="true">
+</video>
+
+---
+
 
 ## Why are we still 2D?
 
@@ -278,9 +266,6 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 
 <hr noshade size=1> Image from http://tvtropes.org/pmwiki/pmwiki.php/Theatre/FiddlerOnTheRoof?from=Main.FiddlerOnTheRoof</hr>
 
-
- 
-
 ---
 
 
@@ -296,6 +281,19 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 
 ---
 
+## Where's my 4D?
+
+* Currently 4D is not implemented in `rgl`
+* Can export multiple figures and switch back in forth like Slicer Example
+  * Doesn't hold camera angle
+  * Current research work - next few months
+
+<img src="Wheres-the-Beef1.jpg" alt="Fiddler" height="200" width="200">
+
+<hr noshade size=1> Image from http://blogs.citrix.com/2012/09/19/wheres-the-beef/wheres-the-beef-2/</hr>
+
+---
+
 ## Conclusion
 
 * 3D figures are <span class="black"><b>doable</b></span>
@@ -303,7 +301,8 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 * Currently - good for internal reports/<span class="black"><b>EDA</b></span>
 * <span class="black"><b>Not accepted</b></span> as figures - but supplemental material
 * <span class="black"><b>More use</b></span> - better tools and more acceptance
-* Can be done for all `rgl` objects, but use with <span class="black"><b>caution</b></span>
+
+* Note: Exporting can be done for all `rgl` objects, but use with <span class="black"><b>caution</b></span> - I am not condoning wild 4D exploding pie charts
 
 ---
 
@@ -333,11 +332,6 @@ R package version 0.3-3, <a href="http://CRAN.R-project.org/package=knitcitation
 R</EM>.
 R package version 1.1.4, <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.
 
-<p>Feng D and Tierney L (2008).
-&ldquo;Computing and Displaying Isosurfaces in R.&rdquo;
-<EM>Journal of Statistical Software</EM>, <B>28</B>(1).
-<a href="http://www.jstatsoft.org/v28/i01/">http://www.jstatsoft.org/v28/i01/</a>.
-
 <p>Whitcher B, Schmid VJ and Thornton A (2011).
 &ldquo;Working with the DICOM and NIfTI Data Standards in R.&rdquo;
 <EM>Journal of Statistical Software</EM>, <B>44</B>(6), pp. 1&ndash;28.
@@ -356,85 +350,6 @@ R package version 0.93.928, <a href="http://CRAN.R-project.org/package=rgl">http
 <EM>slidify: Generate reproducible html5 slides from R markdown</EM>.
 R package version 0.3.3, <a href="http://ramnathv.github.com/slidify/">http://ramnathv.github.com/slidify/</a>.
 
-<p>Sweeney E, Shinohara R, Shea C, Reich D and Crainiceanu C (2012).
-&ldquo;Automatic Lesion Incidence Estimation and Detection in Multiple Sclerosis
-Using Multisequence Longitudinal MRI.&rdquo;
-<EM>American Journal of Neuroradiology</EM>.
-
 </span>
 ---
 
-
-## Slicer
-* GUI-based interface:
-
-<img src="Slicer.png" alt="Slicer" height="500" width="1000">
-
----
-
-## Slicer Example 
-
-From <a href="https://github.com/xtk/SlicerWebGLExport/blob/master/README.md">https://github.com/xtk/SlicerWebGLExport/blob/master/README.md</a>.  Shows exportability. 
-
-(Left 3D Slicer, Right - Google Chrome)
-
-<img src="Slicer_Example_web.png" height="400" width="700" alt="Example of web rendering">
-
----
-
-## Pros of Using Slicer
-
-* GUI interface - can change opacity/measures interactively WSIWYG-ish
-* Can make <b>exportable</b> (to html) figures
-* Can incorporate into 4D - but not "out of the box" - have to add on javascript 
-* Has many capabilities
-* Scripting interface (I've never used) using `Python`
-
----
-
-## More addons in `R`/Explanation?
-
-* RGL - `R` adaptation of OpenGL
-* Has 3d extensions of many functions: `plot3d`, `hist3d`, `text3d`, etc.
-* misc3d package [ Feng & Tierney (2008) ] - add ons to this and allows for contours
-* `writeWebGL` - `rgl` function that allows you to write to webGL
-
----
-
-
-
-## Things Hiding in 2D
-* Real Life Example:
-
-* SubLIME is a MS lesion detection algorithm [Sweeney _et. al._ 2012].  
-* MS - SUBLIME
-* before 3D rendering - didn't notice misregistration
-
----
-
-## Moving through Space <span class="black"><b>and</b></span> Time!
-* Look at data by slice over time 
-  * Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis
-
-![plot of chunk lightbox2](figure/lightbox2.png) 
-
----
-
-
-## RGL Caveats
-So RGL rendering is perfect, right?
-
-<img src="html_screenshot.png" height="400" alt="Lot of code">
-
----
-
-
-## RGL Caveats
-
-* Size of gzipped NIfTI file : 418Kb, unzipped 4Mb
-* Size of html output : 30Mb  
-* WebGL can only hold 65535 points in an object - need to break up 
-  * http://biostat.jhsph.edu/~jmuschel/code/WebGL_Example.zip has example of how to do this (thanks to Duncan Murdoch)
-* Also hard to see what's going on in the html
-
----
