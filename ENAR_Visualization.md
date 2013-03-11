@@ -8,7 +8,14 @@ highlighter : prettify  # {highlight.js, prettify, highlight}
 hitheme     : hemisu-dark      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
+--- .cover #Cover
+
+# Shower Presentation Template
+
+![cover](Fiddler.gif)
+
 ---
+
 
 
 
@@ -136,19 +143,15 @@ What kind of data do we have?
 
 
 ## Current methods of visualizing/EDA
+* "Lightbox" - using image.nifti from `oro.nifti`  [Whitcher _et. al._ (2011)] package:
+
+<span class="black"><b>Read left to right like a book - down the page is down the brain</b></span>
+
+![plot of chunk lightbox](figure/lightbox.png) 
 
 <!---
 * Time series of individual voxels/regions of interest (ROI) <span class="black"><b>Keep 2D</b></span>
 -->
-* Look at data cross-sectionally ("Lightbox")
-
-
-Using image.nifti from `oro.nifti`  [Whitcher _et. al._ (2011)] package:
-
-<span class="black"><b>Read left to right like a book</b></span>
-
-![plot of chunk lightbox](figure/lightbox.png) 
-
 
 ---
 

@@ -8,7 +8,14 @@ highlighter : prettify  # {highlight.js, prettify, highlight}
 hitheme     : hemisu-dark      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
+--- .cover #Cover
+
+# Shower Presentation Template
+
+![cover](Fiddler.gif)
+
 ---
+
 
 ```{r opts, comment="", prompt=TRUE, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, comment=""}
 library(knitr)
@@ -241,25 +248,23 @@ What kind of data do we have?
 
 
 ## Current methods of visualizing/EDA
+* "Lightbox" - using image.nifti from `oro.nifti`  [`r citet(bib["oro.nifti"])`] package:
 
-<!---
-* Time series of individual voxels/regions of interest (ROI) <span class="black"><b>Keep 2D</b></span>
--->
-* Look at data cross-sectionally ("Lightbox")
+<span class="black"><b>Read left to right like a book - down the page is down the brain</b></span>
 
-
-Using image.nifti from `oro.nifti`  [`r citet(bib["oro.nifti"])`] package:
-
-<span class="black"><b>Read left to right like a book</b></span>
-
-```{r lightbox, dev='png', fig.height=5, fig.width=10, warning=FALSE, cache=TRUE}
+```{r lightbox, dev='png', fig.height=6, fig.width=12, warning=FALSE, cache=TRUE}
 have_info <- which(!apply(tmp, 3, function(x) any(x > 0)))
 mid <- dim(tmp)[3]/2
 have_info <- have_info[have_info > mid]
 #image(tmp, plot.type="multiple")
-x <- tmp[,,1:min(have_info), drop=FALSE]
+### take out slices with no info
+## reverse so going "up the brain"
+x <- tmp[,,min(have_info):1, drop=FALSE]
 image.nifti(nifti(x))
 ```
+<!---
+* Time series of individual voxels/regions of interest (ROI) <span class="black"><b>Keep 2D</b></span>
+-->
 
 ---
 
