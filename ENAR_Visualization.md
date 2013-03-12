@@ -10,12 +10,6 @@ widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 --- .cover #Cover
 
-# Shower Presentation Template
-
-![cover](Fiddler.gif)
-
----
-
 
 
 
@@ -37,15 +31,21 @@ mode        : selfcontained # {standalone, draft}
 
 * PhD student in Biostatistics at Johns Hopkins Bloomberg School of Public Health with <span class="black"><b>Ciprian Craniceanu</b></span>
 
-* ScM 2010 (<span class="black"><b>Brian Caffo</b></span>)
+* ScM 2010 (<span class="black"><b>Brian Caffo</b></span>) <img src="SMART_logo.png" style="width:400px; height:100px; float:right;" alt="Lot of code" >
 
 * Worked in fMRI/CT for last 4 years
 
 * Part of the <span class="black"><b>SMART group</b></span>, and ADHD-200 competition winners
 
-* http://biostat.jhsph.edu/~jmuschel/
+* http://biostat.jhsph.edu/~jmuschel/ 
 
-* Talk hosted at https://github.com/muschellij2/ENAR_2013_Talk
+* Talk hosted at https://github.com/muschellij2/ENAR_2013_Talk 
+
+<img src="clear3_logo.png" style="width:125px; height:100px; float:right;" alt="Lot of code" >
+
+<img src="MISTIE3-LOGO.png" style="width:200px; height:100px; float:left;" alt="Lot of code" >
+
+
 
 ---
 
@@ -97,6 +97,14 @@ mode        : selfcontained # {standalone, draft}
 
 ---
 
+## Neuroimaging Data 
+
+<img src="movie_final.gif" style="float:right;" height=350 width=350 alt="Spinning floating brain">
+
+<img src="Data_pixels.png" height=308 width=600 alt="Data structure">
+
+---
+
 
 ## Neuroimaging Data 
 What kind of data do we have?
@@ -114,20 +122,6 @@ What kind of data do we have?
 
 
 
-## 3D rendering tools out there
-
-* <span class = 'green'>RGL</span> (R Graphics Library) [Adler & Murdoch, 2013] using `R` - http://cran.r-project.org/
-* <span class = 'green'>3D Slicer</span> - http://www.slicer.org/
-* Paraview - http://www.paraview.org/
-* Freesurfer - http://surfer.nmr.mgh.harvard.edu/
-* AFNI - http://afni.nimh.nih.gov/afni
-* MIPAV - http://mipav.cit.nih.gov/
-* Matlab
-* http://slicedrop.com/ - TRY THIS
-* Many more
-
----
-
 ## Overall Message
 
 * 3D (<span class="red"><b>neuroimaging</b></span>)  figures can be created/<span class="red"><b>exported easily</b></span>
@@ -138,6 +132,22 @@ What kind of data do we have?
  
 * We need to figure how to effectively incorporate into pipelines/<span class="red"><b>publications</b></span>
 
+
+---
+
+
+
+## 3D rendering tools out there
+
+* <span class = 'green'>RGL</span> (R Graphics Library) [Adler & Murdoch, 2013] using `R` - http://cran.r-project.org/
+* <span class = 'green'>3D Slicer</span> - http://www.slicer.org/ - xtk based
+* Paraview - http://www.paraview.org/
+* Freesurfer - http://surfer.nmr.mgh.harvard.edu/
+* AFNI - http://afni.nimh.nih.gov/afni
+* MIPAV - http://mipav.cit.nih.gov/
+* Matlab
+* http://slicedrop.com/ - TRY THIS - xtk-based
+* Many more
 
 ---
 
@@ -315,6 +325,7 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 * Ciprian Craniceanu and Brian Caffo - SMART Group
 * Dan Hanley - MISTIE Trial
 * Elizabeth Sweeney 
+* Taki Shinohara
 * Duncan Murdoch - for rgl and exporting: otherwise I'd still be presenting distorted brains
 * Those who created the tools I use without even thinking
 
