@@ -118,7 +118,7 @@
 
       <slide class="" id="slide-5" style="background:;">
   <hgroup>
-    <h2>Why should I care/do imaging?</h2>
+    <h2>Why care about/do imaging?</h2>
   </hgroup>
   <article>
     <ul>
@@ -314,14 +314,38 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
 
       <slide class="" id="slide-15" style="background:;">
   <hgroup>
+    <h2>Markdown - Use <code>R</code>!</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Integration into <code>knitr</code> is working - webgl hook
+
+<ul>
+<li>Exporting the html first, then embedding in html works fine</li>
+<li>RStudio&#39;s default doesn&#39;t open md&#39;s over 2Mb (brain was 30Mb)</li>
+</ul></li>
+<li><p><code>shiny</code> integration is possible, but slow depending on system</p>
+
+<ul>
+<li>Meta-Interactive? Interactive control over interactive graphics</li>
+</ul></li>
+<li><p><code>slidify</code> works with it (used in this presentation)</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-16" style="background:;">
+  <hgroup>
     <h2>What (I think) makes a good interactive neuroimaging figure</h2>
   </hgroup>
   <article>
     <ul>
 <li>3-4D <span class="black"><b>Interactive</b></span> (move, zoom, remove/add surfaces)</li>
+<li><span class="black"><b>Transparency</b></span> (opacity) - subcortical structures</li>
 <li>Easy to use</li>
 <li><span class="black"><b>Quick</b></span> to render (at least on user level)</li>
-<li><span class="black"><b>Transparency</b></span> (opacity) - subcortical structures</li>
 <li>No (or very limited) 3rd Party software</li>
 <li><p><span class="black"><b>Exportable</b></span></p>
 
@@ -332,7 +356,7 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-16" style="background:;">
+      <slide class="" id="slide-17" style="background:;">
   <hgroup>
     <h2>Moving through Space <span class="black"><b>and</b></span> Time!</h2>
   </hgroup>
@@ -343,7 +367,7 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-17" style="background:;">
+      <slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Slicer Example - WebGL export - CT Data</h2>
   </hgroup>
@@ -356,7 +380,7 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-18" style="background:;">
+      <slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Why are we still 2D?</h2>
   </hgroup>
@@ -387,42 +411,18 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-19" style="background:;">
-  <hgroup>
-    <h2>Markdown - Use <code>R</code>!</h2>
-  </hgroup>
-  <article>
-    <ul>
-<li>Integration into <code>knitr</code> is working - webgl hook
-
-<ul>
-<li>Exporting the html first, then embedding in html works fine</li>
-<li>RStudio&#39;s default doesn&#39;t open md&#39;s over 2Mb (brain was 30Mb)</li>
-</ul></li>
-<li><p><code>shiny</code> integration is possible, but slow depending on system</p>
-
-<ul>
-<li>Meta-Interactive? Interactive control over interactive graphics</li>
-</ul></li>
-<li><p><code>slidify</code> works with it (used in this presentation)</p></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
       <slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>Where&#39;s my 4D?</h2>
   </hgroup>
   <article>
     <ul>
-<li>Currently 4D is not implemented in <code>rgl</code></li>
+<li>Currently <span class="black"><b>4D is not implemented</b></span> in <code>rgl</code></li>
 <li>Can export multiple figures and switch back in forth like Slicer Example
 
 <ul>
 <li>Doesn&#39;t hold camera angle</li>
-<li>Current research work - next few months</li>
+<li><span class="black"><b>Current research work</b></span></li>
 </ul></li>
 </ul>
 

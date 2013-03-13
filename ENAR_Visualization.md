@@ -82,7 +82,7 @@ mode        : selfcontained # {standalone, draft}
 
 ---
 
-## Why should I care/do imaging?
+## Why care about/do imaging?
 
 * Non-invasive (think <span class="black">craniotomy</span>)
 * Potential biomarkers - early identification
@@ -222,6 +222,19 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 
 ---
 
+## Markdown - Use `R`!
+
+* Integration into `knitr` is working - webgl hook
+  * Exporting the html first, then embedding in html works fine
+  * RStudio's default doesn't open md's over 2Mb (brain was 30Mb)
+* `shiny` integration is possible, but slow depending on system
+  * Meta-Interactive? Interactive control over interactive graphics
+  
+* `slidify` works with it (used in this presentation)
+
+---
+
+
 
 
 
@@ -229,9 +242,9 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 
 
 * 3-4D <span class="black"><b>Interactive</b></span> (move, zoom, remove/add surfaces)
+* <span class="black"><b>Transparency</b></span> (opacity) - subcortical structures
 * Easy to use
 * <span class="black"><b>Quick</b></span> to render (at least on user level)
-* <span class="black"><b>Transparency</b></span> (opacity) - subcortical structures
 * No (or very limited) 3rd Party software
 * <span class="black"><b>Exportable</b></span>
   
@@ -282,24 +295,12 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 ---
 
 
-## Markdown - Use `R`!
-
-* Integration into `knitr` is working - webgl hook
-  * Exporting the html first, then embedding in html works fine
-  * RStudio's default doesn't open md's over 2Mb (brain was 30Mb)
-* `shiny` integration is possible, but slow depending on system
-  * Meta-Interactive? Interactive control over interactive graphics
-  
-* `slidify` works with it (used in this presentation)
-
----
-
 ## Where's my 4D?
 
-* Currently 4D is not implemented in `rgl`
+* Currently <span class="black"><b>4D is not implemented</b></span> in `rgl`
 * Can export multiple figures and switch back in forth like Slicer Example
   * Doesn't hold camera angle
-  * Current research work - next few months
+  * <span class="black"><b>Current research work</b></span>
 
 <img src="Wheres-the-Beef1.jpg" alt="Fiddler" height="200" width="200">
 
