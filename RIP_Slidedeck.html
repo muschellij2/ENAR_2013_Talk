@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Visualizing Brain Imaging in Interactive 3D</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Visualizing Brain Imaging in Interactive 3D">
+  <meta name="author" content="@StrictlyStat (github: muschellij2)">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/prettify/css/hemisu-dark.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+    
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+    <!-- END LOGO SLIDE -->
+    
+
+    <!-- TITLE SLIDE -->
+    <!-- Should I move this to a Local Layout File? -->
+    <slide class="title-slide segue nobackground">
+      <hgroup class="auto-fadein">
+        <h1>Visualizing Brain Imaging in Interactive 3D</h1>
+        <h2>John Muschelli (RIP 2013)</h2>
+        <p>@StrictlyStat (github: muschellij2)<br/>Johns Hopkins Bloomberg School of Public Health</p>
+      </hgroup>
+          </slide>
+
+    <!-- SLIDES -->
+      <slide class="cover" id="Cover" style="background:;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    <!---
+<object data="./WebGL/index.html" width="600" height="400"> <embed src="./WebGL/index.html" width="600" height="400"> </embed> Error: Embedded data could not be displayed. </object>
+-->
+
+<h2>Overview</h2>
+
+<ul>
+<li><strong>CLEAR and MISTIE Trials</strong></li>
+<li>Visualizing imaging data better</li>
+<li>Novel methods for CT Data</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>MISTIE and CLEAR Trials</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li><p>Intraventricular Hemorrhage (IVH) and Intracerebral Hemorrhage (ICH), and generally hypertensive bleeds</p></li>
+<li><p>CLEAR (IVH)- Clot Lysis: Evaluating Accelerated Resolution of Hemorrhage with rt-PA (Phase III - began Sept 2009)</p>
+
+<ul>
+<li>500 patients total</li>
+<li>Placebo/Control</li>
+</ul></li>
+<li><p>MISTIE (ICH) - Minimally Invasive Surgery + rt-PA for Intracerebral Hemorrhage (Phase II - just completed)</p>
+
+<ul>
+<li>123 randomized patients: 60 surgical, 63 control (medical management)</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>MISTIE and CLEAR Data</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Serial CT imaging to show clot clearance</li>
+<li>5-12 per person</li>
+<li>(as a reference - many stroke trials get 1-2)</li>
+<li>Previous studies have shown that clot volume and clot location (at least for IVH) is indicative of good functional outcome</li>
+<li>Good functional - outcome (modified Rankin Score)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Hey</h2>
+  </hgroup>
+  <article>
+    <table border=1>
+<CAPTION ALIGN="bottom"> Logistic regression for 180-day Modified Rankin outcome scores (mRS).  Models are presented with odds ratio of mRS < 4 and confidence intervals as: LB;OR UB;, where OR is the odds ratio, and LB/UB are the upper/lower bounds of the 95% confidence interval, respectively.  Both MIS and higher clot resolution increase the odds of a good functional outcome (mRS < 4), after adjusting for initial severity factors. </CAPTION>
+  <TR> <TD> GCS at Enrollment </TD> <TD align="center">  1.34;1.75; 2.29 </TD> <TD align="center"> < 0.0001 </TD> <TD align="center">  1.36;1.81; 2.40 </TD> <TD align="center"> < 0.0001 </TD> </TR>
+   <TR> <TD> Age at Enrollment </TD> <TD align="center">  0.86; 0.92; 0.97 </TD> <TD align="center"> 0.004 </TD> <TD align="center">  0.85; 0.91; 0.97 </TD> <TD align="center"> 0.003 </TD> </TR>
+   <TR> <TD> Pre-Randomization ICH Volume (per 10cc) </TD> <TD align="center">  0.64; 0.90; 1.25 </TD> <TD align="center"> 0.514 </TD> <TD align="center">  0.40; 0.64; 1.01 </TD> <TD align="center"> 0.056 </TD> </TR>
+   <TR> <TD> MIS vs. Medical </TD> <TD align="center">  0.75; 2.63; 9.30 </TD> <TD align="center"> 0.133 </TD> <TD align="center">  </TD> <TD align="center">  </TD> </TR>
+   <TR> <TD> Resolved ICH Volume (per 10cc) </TD> <TD align="center">  </TD> <TD align="center">  </TD> <TD align="center">  1.12; 1.84; 3.03 </TD> <TD align="center"> 0.017 </TD> </TR>
+</table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Moving through Space <span class="black"><b>and</b></span> Time!</h2>
+  </hgroup>
+  <article>
+    <p><img src="238-4136_Thumbnails.png" style="width:780px; height:540px; center;" alt="Lot of code" ></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Slicer Example - WebGL export - CT Data</h2>
+  </hgroup>
+  <article>
+    <p><video width="900" height="580" controls>
+  <source src="Slicer_Example.mp4" type="video/mp4" loop="true">
+</video></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Neuroimaging Data</h2>
+  </hgroup>
+  <article>
+    <p><img src="movie_final.gif" style="float:right;" height=350 width=350 alt="Spinning floating brain"></p>
+
+<p><img src="Data_pixels.png" height=308 width=600 alt="Data structure"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Overview</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>CLEAR and MISTIE Trials</li>
+<li><strong>Visualizing imaging data better</strong></li>
+<li>Novel methods for CT Data</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Current methods of visualizing/EDA</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>&quot;Lightbox&quot; - using image.nifti from <code>oro.nifti</code>  [<a href="http://www.jstatsoft.org/v44/i06/">Whitcher <em>et. al.</em> (2011)</a>] package:</li>
+</ul>
+
+<p><span class="black"><b>Read left to right like a book - down the page is down the brain</b></span></p>
+
+<p><img src="figure/lightbox.png" alt="plot of chunk lightbox"> </p>
+
+<!---
+* Time series of individual voxels/regions of interest (ROI) <span class="black"><b>Keep 2D</b></span>
+-->
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Current methods of visualizing/EDA</h2>
+  </hgroup>
+  <article>
+    <p>Overall, most methods keep temporal or 2D spatial components fixed and vary the other. 
+Using orthographic from <code>oro.nifti</code> package:</p>
+
+<p><img src="figure/ortho.png" alt="plot of chunk ortho"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Example of 3D in <code>R</code></h2>
+  </hgroup>
+  <article>
+    <iframe width="1200" height="800" src="./WebGL/index_jsed.html" style="-webkit-transform:scale(1);-moz-transform-scale(1);"></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>What (I think) makes a good interactive neuroimaging figure</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>3-4D <span class="black"><b>Interactive</b></span> (move, zoom, remove/add surfaces)</li>
+<li><span class="black"><b>Transparency</b></span> (opacity) - subcortical structures</li>
+<li>Easy to use</li>
+<li><span class="black"><b>Quick</b></span> to render (at least on user level)</li>
+<li>No (or very limited) 3rd Party software</li>
+<li><p><span class="black"><b>Exportable</b></span></p>
+
+<p>(Note - current figures do not have all these qualities )</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Biblio</h2>
+  </hgroup>
+  <article>
+    <p><span style="font-size:15px;">
+<p>Adler D and Murdoch D (2013).
+&ldquo;rgl: 3D visualization device system (OpenGL).&rdquo;
+R package version 0.93.928, <a href="http://CRAN.R-project.org/package=rgl"><a href="http://CRAN.R-project.org/package=rgl">http://CRAN.R-project.org/package=rgl</a></a>.</p>
+
+<p><p>Boettiger C (2013).
+<EM>knitcitations: Citations for knitr markdown files</EM>.
+R package version 0.3-3, <a href="http://CRAN.R-project.org/package=knitcitations"><a href="http://CRAN.R-project.org/package=knitcitations">http://CRAN.R-project.org/package=knitcitations</a></a>.</p>
+
+<p><p>RStudio (2013).
+&ldquo;RStudio: Integrated development environment for R (Version 0.97.320).&rdquo;
+[Computer software]. Retrieved March 6, 2013.
+<a href="http://www.rstudio.org/"><a href="http://www.rstudio.org/">http://www.rstudio.org/</a></a>.</p>
+
+<p><p>Stein J, Jewison N, Topol, Crane N, Frey L, Picon M, Mann P, Morris O, Harnick S, Williams J and others (1964).
+<EM>Fiddler on the Roof</EM>.
+Crown.</p>
+
+<p><p>Vaidyanathan R (2012).
+<EM>slidify: Generate reproducible html5 slides from R markdown</EM>.
+R package version 0.3.3, <a href="http://ramnathv.github.com/slidify/"><a href="http://ramnathv.github.com/slidify/">http://ramnathv.github.com/slidify/</a></a>.</p>
+
+<p><p>Whitcher B, Schmid VJ and Thornton A (2011).
+&ldquo;Working with the DICOM and NIfTI Data Standards in R.&rdquo;
+<EM>Journal of Statistical Software</EM>, <B>44</B>(6), pp. 1&ndash;28.
+<a href="http://www.jstatsoft.org/v44/i06/"><a href="http://www.jstatsoft.org/v44/i06/">http://www.jstatsoft.org/v44/i06/</a></a>.</p>
+
+<p><p>Xie Y (2013).
+<EM>knitr: A general-purpose package for dynamic report generation in
+R</EM>.
+R package version 1.1.4, <a href="http://yihui.name/knitr/"><a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a></a>.</p>
+
+<h2></span></h2>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+
+  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+<!-- Grab CDN jQuery, fall back to local if offline -->
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery-1.7.min.js"><\/script>')</script>
+<!-- Load Javascripts for Widgets -->
+<!-- Google Prettify -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script src='libraries/highlighters/prettify/js/lang-r.js'></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint ";
+  }
+  prettyPrint();
+</script>
+<!-- End Google Prettify --></html>

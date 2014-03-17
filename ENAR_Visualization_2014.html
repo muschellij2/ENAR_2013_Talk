@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>brainR Interactive 3 and 4d Images of High Resolution Neuroimage Data</title>
+  <meta charset="utf-8">
+  <meta name="description" content="brainR Interactive 3 and 4d Images of High Resolution Neuroimage Data">
+  <meta name="author" content="@StrictlyStat (github: muschellij2)">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/prettify/css/hemisu-dark.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>brainR Interactive 3 and 4d Images of High Resolution Neuroimage Data</h1>
+    <h2>John Muschelli  (ENAR 2014)</h2>
+    <p>@StrictlyStat (github: muschellij2)<br/>Johns Hopkins Bloomberg School of Public Health</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="cover" id="Cover" style="background:;">
+  <article data-timings="">
+    <!---
+<object data="./WebGL/index.html" width="600" height="400"> <embed src="./WebGL/index.html" width="600" height="400"> </embed> Error: Embedded data could not be displayed. </object>
+-->
+
+<h2>Talk Outline</h2>
+
+<ul>
+<li>We have 3D/4D data
+
+<ul>
+<li>Single-subject brains over time</li>
+<li>Brain maps over group</li>
+</ul></li>
+<li>We want to visualize the data</li>
+<li>We wrote some software to do it</li>
+<li>Examples</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>3D Graphics? - just because we can, doesn&#39;t mean we should</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="3D_Hist.png" style="width:400px; height:400px; border:1px solid blue; float:left;" alt="Lot of code" ></p>
+
+<p><img src="3D_Excel.png"  style="width:500px; height:400px; border:1px solid blue; float:right;" alt="Lot of code"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Neuroimaging Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="movie_final.gif" style="float:right;" height=350 width=350 alt="Spinning floating brain"></p>
+
+<p><img src="Data_pixels.png" height=308 width=600 alt="Data structure"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Brain acquisition</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><span class="black"><b>Read left to right like a book - down the page is down the brain</b></span></p>
+
+<p>Whole brain is acquired in &quot;slices&quot; - like a deli slicer.</p>
+
+<p><img src="assets/fig/lightbox.png" alt="plot of chunk lightbox"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Current methods of visualizing/EDA</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Overall, most methods keep temporal or 2D spatial components fixed and vary the other. 
+Using orthographic from <code>oro.nifti</code> package:</p>
+
+<pre><code class="r">orthographic(template, col = c(gray(0:61/64), hotmetal(3)), xyz = c(60, 85, 
+    35), text = &quot;Example of activation map&quot;, text.cex = 2)
+</code></pre>
+
+<p><img src="assets/fig/ortho.png" alt="plot of chunk ortho"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Moving through Space <span class="black"><b>and</b></span> Time!</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="238-4136_Thumbnails2.png" style="width:780px; height:540px; center;" alt="Lot of code" ></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Example of 4D data</h2>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>How do we make these?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>An <code>R</code> package that can create exportable <code>4D</code> scenes of surfaces:</p>
+
+<div align="center">
+<p style="font-size:200px; text-align:center;">brainR</p>
+
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>What actually goes on?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>In <code>R</code> - load the data using <code>oro.nifti</code></li>
+<li>Make a contour/surface using <code>contour3d</code> from <code>misc3d</code></li>
+<li>Collect surfaces in a <code>scene</code> (list of objects)</li>
+<li>Use <code>write4D</code> function to create <code>.STL</code> or <code>.OBJ</code> files and an html file.</li>
+<li>X toolkit (XTK): <a href="https://github.com/xtk/X#readme">https://github.com/xtk/X#readme</a> reads and renders those files</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Why (I think) this makes a good interactive neuroimaging figure</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>3-4D <span class="black"><b>Interactive</b></span> (move, zoom, remove/add surfaces)</li>
+<li><span class="black"><b>Transparency</b></span> (opacity) - subcortical structures</li>
+<li>Easy to use</li>
+<li><span class="black"><b>Quick</b></span> to render (at least on user level)</li>
+<li>No (or very limited) 3rd Party software</li>
+<li><span class="black"><b>Exportable</b></span></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Thanks</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Ciprian Craniceanu and Brian Caffo - SMART Group</li>
+<li>Dan Hanley - MISTIE Trial</li>
+<li>Elizabeth Sweeney </li>
+<li>Taki Shinohara</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title=''>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='3D Graphics? - just because we can, doesn&#39;t mean we should'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Neuroimaging Data'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Brain acquisition'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Current methods of visualizing/EDA'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Moving through Space <span class="black"><b>and</b></span> Time!'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Example of 4D data'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='How do we make these?'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='What actually goes on?'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Why (I think) this makes a good interactive neuroimaging figure'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Thanks'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title=''>
+         12
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- Google Prettify -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+  <script src='libraries/highlighters/prettify/js/lang-r.js'></script>
+  <script>
+    var pres = document.getElementsByTagName("pre");
+    for (var i=0; i < pres.length; ++i) {
+      pres[i].className = "prettyprint linenums";
+    }
+    prettyPrint();
+  </script>
+  <!-- End Google Prettify --> 
+  </html>

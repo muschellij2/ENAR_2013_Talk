@@ -43,7 +43,10 @@
     
   </hgroup>
   <article>
-    <!---
+    <pre><code>Error: there is no package called &#39;dti&#39;
+</code></pre>
+
+<!---
 <object data="./WebGL/index.html" width="600" height="400"> <embed src="./WebGL/index.html" width="600" height="400"> </embed> Error: Embedded data could not be displayed. </object>
 -->
 
@@ -72,10 +75,10 @@
   </hgroup>
   <article>
     <ul>
-<li><code>knitr</code> [Xie (2013)] - compiles R code within markdown</li>
-<li><code>slidify</code> [Vaidyanathan (2012)] - makes awesome slide decks (in html)</li>
-<li><code>knitcitations</code> [Boettiger (2013)] - allows my BibTeX to cite in <code>knitr</code></li>
-<li><code>RStudio</code> [RStudio (2013)] - integrated R IDE</li>
+<li><code>knitr</code> [<a href="http://yihui.name/knitr/">Xie (2013)</a> ] - compiles R code within markdown</li>
+<li><code>slidify</code> [<a href="http://ramnathv.github.com/slidify/">Vaidyanathan (2012)</a> ] - makes awesome slide decks (in html)</li>
+<li><code>knitcitations</code> [<a href="http://CRAN.R-project.org/package=knitcitations">Boettiger (2013)</a> ] - allows my BibTeX to cite in <code>knitr</code></li>
+<li><code>RStudio</code> [<a href="http://www.rstudio.org/">RStudio (2013)</a> ] - integrated R IDE</li>
 </ul>
 
   </article>
@@ -201,7 +204,7 @@
   </hgroup>
   <article>
     <ul>
-<li><span class = 'green'>RGL</span> (R Graphics Library) [Adler &amp; Murdoch, 2013] using <code>R</code> - <a href="http://cran.r-project.org/">http://cran.r-project.org/</a></li>
+<li><span class = 'green'>RGL</span> (R Graphics Library) [(<a href="http://CRAN.R-project.org/package=rgl">Adler &amp; Murdoch, 2013</a> )] using <code>R</code> - <a href="http://cran.r-project.org/">http://cran.r-project.org/</a></li>
 <li><span class = 'green'>3D Slicer</span> - <a href="http://www.slicer.org/">http://www.slicer.org/</a> - xtk based</li>
 <li>Paraview - <a href="http://www.paraview.org/">http://www.paraview.org/</a></li>
 <li>Freesurfer - <a href="http://surfer.nmr.mgh.harvard.edu/">http://surfer.nmr.mgh.harvard.edu/</a></li>
@@ -222,7 +225,7 @@
   </hgroup>
   <article>
     <ul>
-<li>&quot;Lightbox&quot; - using image.nifti from <code>oro.nifti</code>  [Whitcher <em>et. al.</em> (2011)] package:</li>
+<li>&quot;Lightbox&quot; - using image.nifti from <code>oro.nifti</code>  [<a href="http://www.jstatsoft.org/v44/i06/">Whitcher et al. (2011)</a> ] package:</li>
 </ul>
 
 <p><span class="black"><b>Read left to right like a book - down the page is down the brain</b></span></p>
@@ -256,7 +259,12 @@ Using orthographic from <code>oro.nifti</code> package:</p>
     <h2>Example of 3D in <code>R</code></h2>
   </hgroup>
   <article>
-    <p><object data="./WebGL/index.html" width="800" height="600"> <embed src="./WebGL/index.html" width="800" height="600"> </embed> Error: Embedded data could not be displayed. </object></p>
+    <!--->
+
+<p><object data="./WebGL/index.html" width="800" height="600"> <embed src="./WebGL/index.html" width="800" height="600"> </embed> Error: Embedded data could not be displayed. </object>
+&lt;---&gt;</p>
+
+<iframe width="800" height="600" src="./WebGL/index.html" style="-webkit-transform:scale(0.5);-moz-transform-scale(0.5);"></iframe>
 
   </article>
   <!-- Presenter Notes -->
@@ -400,7 +408,7 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
 -->
 
 <ul>
-<li>&quot;Tradition!&quot; [Stein <em>et. al.</em> (1964)]</li>
+<li>&quot;Tradition!&quot; [<a href="">Stein et al. (1964)</a> ]</li>
 </ul>
 
 <p><img src="Fiddler.gif" alt="Fiddler" height="200" width="200"></p>
@@ -475,37 +483,18 @@ writeWebGL_split(dir = file.path(outdir, &quot;webGL&quot;), width = 700, height
     <h2>Biblio</h2>
   </hgroup>
   <article>
-    <p><span style="font-size:15px;">
-<p>Stein J, Jewison N, Topol, Crane N, Frey L, Picon M, Mann P, Morris O, Harnick S, Williams J and others (1964).
-<EM>Fiddler on the Roof</EM>.
-Crown.</p>
+    <p><span style="font-size:15px;"></p>
 
-<p><p>Boettiger C (2013).
-<EM>knitcitations: Citations for knitr markdown files</EM>.
-R package version 0.3-3, <a href="http://CRAN.R-project.org/package=knitcitations"><a href="http://CRAN.R-project.org/package=knitcitations">http://CRAN.R-project.org/package=knitcitations</a></a>.</p>
-
-<p><p>Xie Y (2013).
-<EM>knitr: A general-purpose package for dynamic report generation in
-R</EM>.
-R package version 1.1.4, <a href="http://yihui.name/knitr/"><a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a></a>.</p>
-
-<p><p>Whitcher B, Schmid VJ and Thornton A (2011).
-&ldquo;Working with the DICOM and NIfTI Data Standards in R.&rdquo;
-<EM>Journal of Statistical Software</EM>, <B>44</B>(6), pp. 1&ndash;28.
-<a href="http://www.jstatsoft.org/v44/i06/"><a href="http://www.jstatsoft.org/v44/i06/">http://www.jstatsoft.org/v44/i06/</a></a>.</p>
-
-<p><p>Adler D and Murdoch D (2013).
-&ldquo;rgl: 3D visualization device system (OpenGL).&rdquo;
-R package version 0.93.928, <a href="http://CRAN.R-project.org/package=rgl"><a href="http://CRAN.R-project.org/package=rgl">http://CRAN.R-project.org/package=rgl</a></a>.</p>
-
-<p><p>RStudio (2013).
-&ldquo;RStudio: Integrated development environment for R (Version 0.97.320).&rdquo;
-[Computer software]. Retrieved March 6, 2013.
-<a href="http://www.rstudio.org/"><a href="http://www.rstudio.org/">http://www.rstudio.org/</a></a>.</p>
-
-<p><p>Vaidyanathan R (2012).
-<EM>slidify: Generate reproducible html5 slides from R markdown</EM>.
-R package version 0.3.3, <a href="http://ramnathv.github.com/slidify/"><a href="http://ramnathv.github.com/slidify/">http://ramnathv.github.com/slidify/</a></a>.</p>
+<ul>
+<li>Joseph Stein, Norman Jewison,  Topol, Norma Crane, Leonard Frey, Molly Picon, Paul Mann, Oswald Morris, Sheldon Harnick, John Williams,  others,   (1964) Fiddler on the Roof.</li>
+<li>Carl Boettiger,   (2013) knitcitations: Citations for knitr markdown files.  <a href="http://CRAN.R-project.org/package=knitcitations"><a href="http://CRAN.R-project.org/package=knitcitations">http://CRAN.R-project.org/package=knitcitations</a></a></li>
+<li>Yihui Xie,   (2013) knitr: A general-purpose package for dynamic report generation in
+R.  <a href="http://yihui.name/knitr/"><a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a></a></li>
+<li>Brandon Whitcher, Volker Schmid, Andrew Thornton,   (2011) Working with the {DICOM} and {NIfTI} Data Standards in {R}.  <em>Journal of Statistical Software</em>  <strong>44</strong>  (6)   1-28  <a href="http://www.jstatsoft.org/v44/i06/"><a href="http://www.jstatsoft.org/v44/i06/">http://www.jstatsoft.org/v44/i06/</a></a></li>
+<li>Daniel Adler, Duncan Murdoch,   (2013) rgl: 3D visualization device system (OpenGL).  <a href="http://CRAN.R-project.org/package=rgl"><a href="http://CRAN.R-project.org/package=rgl">http://CRAN.R-project.org/package=rgl</a></a></li>
+<li> RStudio,   (2013) RStudio: Integrated development environment for R (Version 0.97.320).  <a href="http://www.rstudio.org/"><a href="http://www.rstudio.org/">http://www.rstudio.org/</a></a></li>
+<li>Ramnath Vaidyanathan,   (2012) slidify: Generate reproducible html5 slides from R markdown.  <a href="http://ramnathv.github.com/slidify/"><a href="http://ramnathv.github.com/slidify/">http://ramnathv.github.com/slidify/</a></a></li>
+</ul>
 
 <h2></span></h2>
 

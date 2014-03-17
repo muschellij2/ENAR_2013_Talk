@@ -16,6 +16,9 @@ mode        : selfcontained # {standalone, draft}
 
 
 
+```
+Error: there is no package called 'dti'
+```
 
 
 
@@ -51,10 +54,10 @@ mode        : selfcontained # {standalone, draft}
 
 ## R programs used for this presentation
 
-* `knitr` [Xie (2013)] - compiles R code within markdown
-* `slidify` [Vaidyanathan (2012)] - makes awesome slide decks (in html)
-* `knitcitations` [Boettiger (2013)] - allows my BibTeX to cite in `knitr`
-* `RStudio` [RStudio (2013)] - integrated R IDE
+* `knitr` [<a href="http://yihui.name/knitr/">Xie (2013)</a> ] - compiles R code within markdown
+* `slidify` [<a href="http://ramnathv.github.com/slidify/">Vaidyanathan (2012)</a> ] - makes awesome slide decks (in html)
+* `knitcitations` [<a href="http://CRAN.R-project.org/package=knitcitations">Boettiger (2013)</a> ] - allows my BibTeX to cite in `knitr`
+* `RStudio` [<a href="http://www.rstudio.org/">RStudio (2013)</a> ] - integrated R IDE
 
 ---
 
@@ -139,7 +142,7 @@ What kind of data do we have?
 
 ## 3D rendering tools out there
 
-* <span class = 'green'>RGL</span> (R Graphics Library) [Adler & Murdoch, 2013] using `R` - http://cran.r-project.org/
+* <span class = 'green'>RGL</span> (R Graphics Library) [(<a href="http://CRAN.R-project.org/package=rgl">Adler & Murdoch, 2013</a> )] using `R` - http://cran.r-project.org/
 * <span class = 'green'>3D Slicer</span> - http://www.slicer.org/ - xtk based
 * Paraview - http://www.paraview.org/
 * Freesurfer - http://surfer.nmr.mgh.harvard.edu/
@@ -153,7 +156,7 @@ What kind of data do we have?
 
 
 ## Current methods of visualizing/EDA
-* "Lightbox" - using image.nifti from `oro.nifti`  [Whitcher _et. al._ (2011)] package:
+* "Lightbox" - using image.nifti from `oro.nifti`  [<a href="http://www.jstatsoft.org/v44/i06/">Whitcher et al. (2011)</a> ] package:
 
 <span class="black"><b>Read left to right like a book - down the page is down the brain</b></span>
 
@@ -176,8 +179,12 @@ Using orthographic from `oro.nifti` package:
 
 ## Example of 3D in `R` 
 
-
+<!--->
 <object data="./WebGL/index.html" width="800" height="600"> <embed src="./WebGL/index.html" width="800" height="600"> </embed> Error: Embedded data could not be displayed. </object>
+<--->
+
+<iframe width="800" height="600" src="./WebGL/index.html" style="-webkit-transform:scale(0.5);-moz-transform-scale(0.5);"></iframe>
+
 
 ---
 
@@ -285,7 +292,7 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 <!--- 
 * Software exists to embed 3D in <span class="black"><b>PDF</b></span> - but not as smooth for large data (See Levine JGCS paper for misc3d)
 -->
-* "Tradition!" [Stein _et. al._ (1964)]
+* "Tradition!" [<a href="">Stein et al. (1964)</a> ]
 
 
 <img src="Fiddler.gif" alt="Fiddler" height="200" width="200">
@@ -334,36 +341,15 @@ writeWebGL_split(dir = file.path(outdir, "webGL"), width = 700, height = 500,
 
 ## Biblio
 <span style="font-size:15px;">
-<p>Stein J, Jewison N, Topol, Crane N, Frey L, Picon M, Mann P, Morris O, Harnick S, Williams J and others (1964).
-<EM>Fiddler on the Roof</EM>.
-Crown.
 
-<p>Boettiger C (2013).
-<EM>knitcitations: Citations for knitr markdown files</EM>.
-R package version 0.3-3, <a href="http://CRAN.R-project.org/package=knitcitations">http://CRAN.R-project.org/package=knitcitations</a>.
-
-<p>Xie Y (2013).
-<EM>knitr: A general-purpose package for dynamic report generation in
-R</EM>.
-R package version 1.1.4, <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.
-
-<p>Whitcher B, Schmid VJ and Thornton A (2011).
-&ldquo;Working with the DICOM and NIfTI Data Standards in R.&rdquo;
-<EM>Journal of Statistical Software</EM>, <B>44</B>(6), pp. 1&ndash;28.
-<a href="http://www.jstatsoft.org/v44/i06/">http://www.jstatsoft.org/v44/i06/</a>.
-
-<p>Adler D and Murdoch D (2013).
-&ldquo;rgl: 3D visualization device system (OpenGL).&rdquo;
-R package version 0.93.928, <a href="http://CRAN.R-project.org/package=rgl">http://CRAN.R-project.org/package=rgl</a>.
-
-<p>RStudio (2013).
-&ldquo;RStudio: Integrated development environment for R (Version 0.97.320).&rdquo;
-[Computer software]. Retrieved March 6, 2013.
-<a href="http://www.rstudio.org/">http://www.rstudio.org/</a>.
-
-<p>Vaidyanathan R (2012).
-<EM>slidify: Generate reproducible html5 slides from R markdown</EM>.
-R package version 0.3.3, <a href="http://ramnathv.github.com/slidify/">http://ramnathv.github.com/slidify/</a>.
+- Joseph Stein, Norman Jewison,  Topol, Norma Crane, Leonard Frey, Molly Picon, Paul Mann, Oswald Morris, Sheldon Harnick, John Williams,  others,   (1964) Fiddler on the Roof.
+- Carl Boettiger,   (2013) knitcitations: Citations for knitr markdown files.  <a href="http://CRAN.R-project.org/package=knitcitations">http://CRAN.R-project.org/package=knitcitations</a>
+- Yihui Xie,   (2013) knitr: A general-purpose package for dynamic report generation in
+	R.  <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>
+- Brandon Whitcher, Volker Schmid, Andrew Thornton,   (2011) Working with the {DICOM} and {NIfTI} Data Standards in {R}.  <em>Journal of Statistical Software</em>  <strong>44</strong>  (6)   1-28  <a href="http://www.jstatsoft.org/v44/i06/">http://www.jstatsoft.org/v44/i06/</a>
+- Daniel Adler, Duncan Murdoch,   (2013) rgl: 3D visualization device system (OpenGL).  <a href="http://CRAN.R-project.org/package=rgl">http://CRAN.R-project.org/package=rgl</a>
+-  RStudio,   (2013) RStudio: Integrated development environment for R (Version 0.97.320).  <a href="http://www.rstudio.org/">http://www.rstudio.org/</a>
+- Ramnath Vaidyanathan,   (2012) slidify: Generate reproducible html5 slides from R markdown.  <a href="http://ramnathv.github.com/slidify/">http://ramnathv.github.com/slidify/</a>
 
 </span>
 ---

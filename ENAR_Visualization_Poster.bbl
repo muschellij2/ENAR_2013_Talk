@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{rgl}
+Daniel Adler and Duncan Murdoch.
+\newblock rgl: 3d visualization device system (opengl), 2013.
+\newblock R package version 0.93.928.
+
+\bibitem{misc3d}
+Dai Feng and Luke Tierney.
+\newblock Computing and displaying isosurfaces in {R}.
+\newblock {\em Journal of Statistical Software}, 28(1), 2008.
+
+\bibitem{opengl}
+Dave Shreiner et~al.
+\newblock {\em OpenGL programming guide: the official guide to learning OpenGL,
+  versions 3.0 and 3.1}.
+\newblock Addison-Wesley Professional, 2009.
+
+\end{thebibliography}
