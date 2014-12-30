@@ -1,0 +1,4 @@
+addpath('~/Downloads/ADisc11')
+img_V = 
+
+pvemrimex(img,brain_mask,tissue_class,class_params,voxel_size,beta,verbose)

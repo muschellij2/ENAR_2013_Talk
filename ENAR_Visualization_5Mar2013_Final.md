@@ -10,49 +10,31 @@ widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 ---
 
-```{r opts, comment="", prompt=TRUE, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, comment=""}
-library(knitr)
-knit_hooks$set(webgl = hook_webgl) 
-opts_chunk$set(echo=FALSE, prompt=FALSE, message=FALSE, warning=FALSE, comment="", results='hide')
+
+
+
+
+
+```
+## Error in f.read.nifti.header(file.hdr): Cannot open file
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'template' not found
+```
+
+```
+## Error in which(template > cut, arr.ind = TRUE): object 'template' not found
+```
+
+```
+## Error in apply(x, 2, function(col) names(which.max(table(col)))): object 'x' not found
 ```
 
 
 
-```{r, prompt=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
-rm(list=ls())
-library(rgl)
-library(misc3d)
-library(oro.dicom)
-library(AnalyzeFMRI)
-library(knitcitations)
-library(slidify)
-library(dti)
-library(plotrix)
-rootdir <- "~/Dropbox/3DPDF_Example"
-outdir <- file.path(rootdir, "Presentation")
-homedir <- file.path(rootdir, "Paper")
-datadir <- file.path(homedir, "data")
-progdir <- file.path(homedir, "programs")
-resdir <- file.path(homedir, "results")
-source(file.path(progdir, "asy.R"))
-source(file.path(progdir, "writeWebGL_split.R"))
 
-#### bibliography
-bibfile <- file.path(homedir, "Paper_ENAR_Visualization.bib")
-bib <- read.bibtex(bibfile)
-
-setwd(outdir)
-tmp <- readNIfTI(file.path(datadir, "MNI152_T1_2mm_brain.nii"), reorient=FALSE)
-template <- f.read.nifti.volume(file.path(datadir, "MNI152_T1_2mm_brain.nii"))
-template <- template[,,,1]
-cut <- 3500
-x <- which(template > cut, arr.ind=TRUE)
-ctr <- as.numeric(apply(x, 2, function(col) names(which.max(table(col)))))
-```
-
-
-
-```{r testgl}
+```r
 ### Template from MNI152 from FSL
 
 
@@ -69,7 +51,6 @@ ctr <- as.numeric(apply(x, 2, function(col) names(which.max(table(col)))))
 # text3d(x=-0.98, y=dtemp[2]/2, z = dtemp[3]/2, text="Right")
 # ## triangle_split()
 # index <- writeWebGL_split(dir=file.path(outdir, "webGL"), width=700, height=500, template= file.path(outdir, "my_template.html"))
-
 ```
 
 <!---
@@ -78,16 +59,17 @@ ctr <- as.numeric(apply(x, 2, function(col) names(which.max(table(col)))))
 
 ## R programs used for this presentation
 
-* `knitr` [`r citet(bib["knitr"])`]
-* `slidify` [`r citet(bib["slidify"])`]
-* `knitcitations` [`r citet(bib["knitcitations"])`]
-* `RStudio` [`r citet(bib["RStudio"])`]
+* `knitr` [Xie (2013)]
+* `slidify` [Vaidyanathan (2012)]
+* `knitcitations` [Boettiger (2013)]
+* `RStudio` [RStudio (2013)]
 
 ---
 
 
 ## 3D Graphics?
-```{r hist3d}
+
+```r
 ##########
 ### 3D HIST EXAMPLE:
 ### Taken from system.file("demo", "hist3d.R", package="rgl")
@@ -154,14 +136,7 @@ rgl.close()
   * No 3D Pie charts/histograms
   * See Karl Broman's [The top ten worst graphs](http://www.biostat.wisc.edu/~kbroman/topten_worstgraphs/)
 
-```{r piechart, echo=FALSE, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
-png("figure/piechart.png")
-slices <- c(50, 50) 
-lbls <- paste0("group", 1:length(slices) )
-pie3D(slices,explode=0.3, theta = pi/3, start=pi/6, col=c("gray", "white", border="green"), main="Pies taste better in 2D", cex.main=2.5)
-text(0, 0, "NO", cex=5, col="red")
-dev.off()
-```
+
 <p><img src="figure/piechart.png" style="width:400px; height:400px" alt="plot of chunk piechart"> </p>
 
 ---
@@ -197,7 +172,7 @@ Visualization and presentation of these data can be <b>improved</b> with the use
 
 * <span class = 'green'>3D Slicer</span> - http://www.slicer.org/
 * Paraview - http://www.paraview.org/
-* <span class = 'green'>RGL</span> [`r citep(bib["rgl"])`] using `R` - http://cran.r-project.org/
+* <span class = 'green'>RGL</span> [(Adler and Murdoch, 2013)] using `R` - http://cran.r-project.org/
 * Freesurfer - http://surfer.nmr.mgh.harvard.edu/
 * AFNI - http://afni.nimh.nih.gov/afni
 * MIPAV - http://mipav.cit.nih.gov/
@@ -213,9 +188,10 @@ Visualization and presentation of these data can be <b>improved</b> with the use
 * Look at data cross-sectionally ("Lightbox" - read left to right like a book, down means higher slices in the brain)
 
 
-Using image.nifti from `oro.nifti`  [`r citet(bib["oro.nifti"])`] package:
+Using image.nifti from `oro.nifti`  [Whitcher, Schmid, and Thornton (2011)] package:
 
-```{r lightbox, dev='png', fig.height=5, fig.width=10, warning=FALSE, cache=TRUE}
+
+```r
 have_info <- which(!apply(tmp, 3, function(x) any(x > 0)))
 mid <- dim(tmp)[3]/2
 have_info <- have_info[have_info > mid]
@@ -224,24 +200,34 @@ x <- tmp[,,1:min(have_info), drop=FALSE]
 image.nifti(nifti(x))
 ```
 
+![plot of chunk lightbox](assets/fig/lightbox-1.png) 
+
 ---
 
 ## Current methods of visualizing/EDA
 * Look at data by slice over time 
   * Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis
 
-```{r lightbox2, dev='png', fig.height=5, fig.width=10, warning=FALSE, cache=TRUE}
+
+```r
 slice95 <- readNIfTI(file.path(datadir, "Slice95.nii.gz"), reorient=FALSE)
 image.nifti(slice95)
 ```
+
+![plot of chunk lightbox2](assets/fig/lightbox2-1.png) 
 ---
 
 ## Current methods of visualizing/EDA
 Overall, most methods keep temporal or 2D spatial components fixed and vary the other. 
 Using orthographic from `oro.nifti` package:
 
-```{r ortho, dev='png', warning=FALSE, cache=TRUE}
+
+```r
 orthographic(template, col=c(gray(0:61/64), hotmetal(3)), xyz=c(60, 85, 35), text="Example of activation map", text.cex=2)
+```
+
+```
+## Error in orthographic(template, col = c(gray(0:61/64), hotmetal(3)), xyz = c(60, : error in evaluating the argument 'x' in selecting a method for function 'orthographic': Error: object 'template' not found
 ```
 
 ---
@@ -257,7 +243,7 @@ orthographic(template, col=c(gray(0:61/64), hotmetal(3)), xyz=c(60, 85, 35), tex
   
 * Software exists to embed 3D in <span class="black"><b>PDF</b></span> - but not as smooth for large data (See Levine JGCS paper for misc3d)
 
-* "Tradition!" [`r citet(bib["fiddler"])`]
+* "Tradition!" [Stein, Jewison, Topol, Crane, Frey, Picon, Mann, Morris, Harnick, Williams, and others (1964)]
 
 ---
 
@@ -354,7 +340,8 @@ Thumbnails of clearance from Natalie
 
 ## How do I do this in `R`? - Example
 
-```{r ex_code, eval=FALSE, echo=TRUE}
+
+```r
 tmp <- readNIfTI(file.path(datadir, "MNI152_T1_2mm_brain.nii"), reorient=FALSE)
 
 contour3d(template, x=1:dim(temp)[1], y=1:dim(temp)[2], z=1:dim(temp)[3], level = 3500, alpha = 0.15)
@@ -377,7 +364,8 @@ writeWebGL_split(dir=file.path(outdir, "webGL"), width=700, height=500, template
 
 
 
-```{r dti-example, cache=FALSE}
+
+```r
 # path2cibc <- file.path(outdir, "brain-dt/")
 # 
 # # read function for NRRD-files
@@ -474,7 +462,6 @@ writeWebGL_split(dir=file.path(outdir, "webGL"), width=700, height=500, template
 # 
 # show3d(dtind)
 # index <- writeWebGL_split(dir=file.path(outdir, "webGL"), filename = file.path(outdir, "webGL", "index_dti.html"), width=700, height=500, template= file.path(outdir, "my_template.html"))
-
 ```
 
 ## DTI Example 
@@ -496,7 +483,7 @@ writeWebGL_split(dir=file.path(outdir, "webGL"), width=700, height=500, template
 ## Things Hiding in 2D
 * Real Life Example:
 
-* SubLIME is a MS lesion detection algorithm [`r citep(bib["sublime"])`].  
+* SubLIME is a MS lesion detection algorithm [(Sweeney, Shinohara, Shea, Reich, and Crainiceanu, 2012)].  
 * MS - SUBLIME
 * before 3D rendering - didn't notice misregistration
 
@@ -554,8 +541,13 @@ So RGL rendering is perfect, right?
 ---
 
 ## Biblio
-```{r biblio, results='asis'}
+
+```r
 bibliography("html") 
+```
+
+```
+## Error in mget(nom, envir = .BibOptions): invalid first argument
 ```
 ---
 

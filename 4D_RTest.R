@@ -52,7 +52,7 @@ scene <- list(brain, activation, ac2, ac3)
 open3d()
 drawScene.rgl(scene)
 text3d(x=dtemp[1]/2, y=dtemp[2]/2, z = dtemp[3]*0.98, text="Top")
-text3d(x=dtemp[1]*0.98, y=dtemp[2]/2, z = dtemp[3]/2, text="Right")
+text3d(x=-0.98, y=dtemp[2]/2, z = dtemp[3]/2, text="Right")
 ## triangle_split()
 
 play3d(spin3d(axis=c(0,0,1), rpm=45), duration=1)

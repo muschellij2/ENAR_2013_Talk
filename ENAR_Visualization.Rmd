@@ -68,7 +68,7 @@ ctr <- as.numeric(apply(x, 2, function(col) names(which.max(table(col)))))
 # scene <- list(brain, activation)
 # drawScene.rgl(scene)
 # text3d(x=dtemp[1]/2, y=dtemp[2]/2, z = dtemp[3]*0.98, text="Top")
-# text3d(x=dtemp[1]*0.98, y=dtemp[2]/2, z = dtemp[3]/2, text="Right")
+# text3d(x=-.98, y=dtemp[2]/2, z = dtemp[3]/2, text="Right")
 # ## triangle_split()
 # index <- writeWebGL_split(dir=file.path(outdir, "webGL"), width=700, height=500, template= file.path(outdir, "my_template.html"))
 
@@ -316,7 +316,7 @@ contour3d(tmp, level = c(8200, 8250), alpha = c(0.5, 0.8), add = TRUE, color=c("
 
 ### add text
 text3d(x=dtemp[1]/2, y=dtemp[2]/2, z = dtemp[3]*0.98, text="Top")
-text3d(x=dtemp[1]*0.98, y=dtemp[2]/2, z = dtemp[3]/2, text="Right")
+text3d(x=-0.98, y=dtemp[2]/2, z = dtemp[3]/2, text="Right")
 
 ### export this to a webpage
 writeWebGL_split(dir=file.path(outdir, "webGL"), width=700, height=500, template= file.path(outdir, "my_template.html"))
