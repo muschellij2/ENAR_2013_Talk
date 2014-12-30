@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="John Muschelli" />
+  <title>Visualizing Brain Imaging in Interactive 3D</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Visualizing Brain Imaging in Interactive 3D</h1>
+  <p class="author">
+John Muschelli
+  </p>
+</div>
+<div class="slide section level2">
+
+<!---
+<object data="./WebGL/index.html" width="600" height="400"> <embed src="./WebGL/index.html" width="600" height="400"> </embed> Error: Embedded data could not be displayed. </object>
+-->
+
+</div>
+<div id="r-programs-used-for-this-presentation" class="slide section level2">
+<h1>R programs used for this presentation</h1>
+<ul>
+<li><code>knitr</code> [Xie (2013)]</li>
+<li><code>slidify</code> [Vaidyanathan (2012)]</li>
+<li><code>knitcitations</code> [Boettiger (2013)]</li>
+<li><code>RStudio</code> [RStudio (2013)]</li>
+</ul>
+</div>
+<div id="d-graphics" class="slide section level2">
+<h1>3D Graphics?</h1>
+<p><img src="3D_Hist.png" style="width:400px; height:400px; border:1px solid blue; float:left;" alt="Lot of code" ></p>
+<p><img src="3D_Excel.png"  style="width:500px; height:400px; border:1px solid blue; float:right;" alt="Lot of code"></p>
+</div>
+<div id="im-not-referring-to-3d-histograms" class="slide section level2">
+<h1>I'm not referring to 3D histograms</h1>
+<ul>
+<li>3D is not good just because of one more D</li>
+<li>3D data representing 2D is still bad</li>
+<li>No 3D Pie charts/histograms</li>
+<li>See Karl Broman's <a href="http://www.biostat.wisc.edu/~kbroman/topten_worstgraphs/">The top ten worst graphs</a></li>
+</ul>
+<p>
+<img src="figure/piechart.png" style="width:400px; height:400px" alt="plot of chunk piechart">
+</p>
+
+</div>
+<div id="overall-message" class="slide section level2">
+<h1>Overall Message</h1>
+<ul>
+<li><p>3D figures can be created/<span class="red" <b="">exported easily</b></span></p></li>
+<li><p><span class="red"><b>Standalone</b></span> objects are needed for end-users/readers</p></li>
+<li><p><span class="red"><b>Webpages</b></span> are a good medium for these</p></li>
+<li><p>We need to figure how to effectively incorporate into pipelines/<span class="red"><b>publications</b></span></p></li>
+</ul>
+</div>
+<div id="neuroimaging-data" class="slide section level2">
+<h1>Neuroimaging Data</h1>
+<p>What kind of data do we have? * <span class="green">Structural MRIs</span> * Functional MRIs * <span class="green">CT</span> * DTI * EEG * PET * etc.</p>
+<p>Visualization and presentation of these data can be <b>improved</b> with the use of 3D tools.</p>
+</div>
+<div id="d-rendering-tools-out-there" class="slide section level2">
+<h1>3D rendering tools out there</h1>
+<ul>
+<li><span class="green">3D Slicer</span> - http://www.slicer.org/</li>
+<li>Paraview - http://www.paraview.org/</li>
+<li><span class="green">RGL</span> [(Adler and Murdoch, 2013)] using <code>R</code> - http://cran.r-project.org/</li>
+<li>Freesurfer - http://surfer.nmr.mgh.harvard.edu/</li>
+<li>AFNI - http://afni.nimh.nih.gov/afni</li>
+<li>MIPAV - http://mipav.cit.nih.gov/</li>
+<li>Matlab, etc.</li>
+</ul>
+</div>
+<div id="current-methods-of-visualizingeda" class="slide section level2">
+<h1>Current methods of visualizing/EDA</h1>
+<ul>
+<li>Time series of individual voxels/regions of interest (ROI) <b>Keep 2D</b></li>
+<li>Look at data cross-sectionally (&quot;Lightbox&quot; - read left to right like a book, down means higher slices in the brain)</li>
+</ul>
+<p>Using image.nifti from <code>oro.nifti</code> [Whitcher, Schmid, and Thornton (2011)] package:</p>
+<div class="figure">
+<img src="assets/fig/lightbox-1.png" alt="plot of chunk lightbox" /><p class="caption">plot of chunk lightbox</p>
+</div>
+</div>
+<div id="current-methods-of-visualizingeda-1" class="slide section level2">
+<h1>Current methods of visualizing/EDA</h1>
+<ul>
+<li>Look at data by slice over time</li>
+<li>Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis</li>
+</ul>
+</div>
+<div id="plot-of-chunk-lightbox2" class="slide section level2">
+<h1><img src="assets/fig/lightbox2-1.png" alt="plot of chunk lightbox2" /></h1>
+</div>
+<div id="current-methods-of-visualizingeda-2" class="slide section level2">
+<h1>Current methods of visualizing/EDA</h1>
+<p>Overall, most methods keep temporal or 2D spatial components fixed and vary the other. Using orthographic from <code>oro.nifti</code> package:</p>
+<div class="figure">
+<img src="assets/fig/ortho-1.png" alt="plot of chunk ortho" /><p class="caption">plot of chunk ortho</p>
+</div>
+</div>
+<div id="why-are-we-still-2d" class="slide section level2">
+<h1>Why are we still 2D?</h1>
+<ul>
+<li><p>We do EDA/QC mainly only in 2D</p></li>
+<li><p>Some investment in new software - how many languages is enough!?</p></li>
+<li>3D Figures in Papers/Presentations are not generally accepted</li>
+<li><p>&quot;Nice picture, but where's the figure for the paper&quot;</p></li>
+<li><p>Software exists to embed 3D in <span class="black"><b>PDF</b></span> - but not as smooth for large data (See Levine JGCS paper for misc3d)</p></li>
+<li><p>&quot;Tradition!&quot; [Stein, Jewison, Topol, et al. (1964)]</p></li>
+</ul>
+</div>
+<div id="what-i-think-makes-a-good-interactive-neuroimaging-figure" class="slide section level2">
+<h1>What (I think) makes a good interactive neuroimaging figure</h1>
+<ul>
+<li>3-4D <b>Interactive</b> (move, zoom, remove/add surfaces)</li>
+<li>Easy to use</li>
+<li><b>Quick</b> to render (at least on user level)</li>
+<li><b>Transparency</b> (opacity) - subcortical structures</li>
+<li>No (or very limited) 3rd Party software</li>
+<li><span class="black"><b>Exportability</b></span></li>
+</ul>
+<p>(Note - current figures do not have all these qualities )</p>
+</div>
+<div id="d-slicer" class="slide section level2">
+<h1>3D Slicer</h1>
+<ul>
+<li>Comes out of Bringham and Women's Hospital/Harvard Group</li>
+<li>User community also makes functions (modules in <code>Slicer</code>)</li>
+<li><code>3D Slicer</code> is a processing, analysis, and rendering tool</li>
+<li>Can read in almost all imaging types</li>
+<li>Very visual interface: <img src="Slicer.png" alt="Slicer" height="500" width="1000"> ---</li>
+</ul>
+</div>
+<div id="slicer-example---ct-data" class="slide section level2">
+<h1>Slicer Example - CT Data</h1>
+<p>From <a href="https://github.com/xtk/SlicerWebGLExport/blob/master/README.md">https://github.com/xtk/SlicerWebGLExport/blob/master/README.md</a></p>
+<p><img src="Slicer_Example_web.png" alt="Example of web rendering"></p>
+</div>
+<div id="slicer-example---ct-data-1" class="slide section level2">
+<h1>Slicer Example - CT Data</h1>
+<p>Motivating Example:</p>
+<p>Thumbnails of clearance from Natalie</p>
+</div>
+<div id="slicer-example---ct-data-2" class="slide section level2">
+<h1>Slicer Example - CT Data</h1>
+<video width="900" height="580" controls>
+  
+<source src="Slicer_Example.mp4" type="video/mp4" loop="true">
+</video>
+
+</div>
+<div id="pros-of-using-slicer" class="slide section level2">
+<h1>Pros of Using Slicer</h1>
+<ul>
+<li>GUI interface - can change opacity/measures interactively WSIWYG-ish</li>
+<li>Can make <b>exportable</b> (to html) figures</li>
+<li>Can incorporate into 4D - but not &quot;out of the box&quot; - have to add on javascript</li>
+<li>Has many capabilities</li>
+<li>Scripting interface (I've never used) using <code>Python</code></li>
+</ul>
+</div>
+<div id="why-use-r" class="slide section level2">
+<h1>Why use <code>R</code>?</h1>
+<ul>
+<li>Why choose as the main tool?</li>
+<li><span class="black"><b>Statistics</b></span></li>
+<li><span class="black"><b>Packages</b></span></li>
+<li>Open-source</li>
+<li><b>REPRODUCIBLE</b> - somewhat lacking in neuroimaging</li>
+<li><b>Scriptable</b></li>
+<li>Exportable</li>
+<li>It works (You'll see it!)</li>
+</ul>
+</div>
+<div id="example-of-3d-in-r" class="slide section level2">
+<h1>Example of 3D in <code>R</code></h1>
+<object data="./WebGL/index.html" width="800" height="600"> <embed src="./WebGL/index.html" width="800" height="600"> </embed> 
+Error: Embedded data could not be displayed.
+</object>
+
+</div>
+<div id="how-do-i-do-this-in-r" class="slide section level2">
+<h1>How do I do this in <code>R</code>?</h1>
+<ul>
+<li>RGL - <code>R</code> adaptation of OpenGL</li>
+<li>Has 3d extensions of many functions: <code>plot3d</code>, <code>hist3d</code>, <code>text3d</code>, etc.</li>
+<li>misc3d package [<code>{r citet(bib[&quot;misc3d&quot;])}</code>] - add ons to this and allows for contours</li>
+<li><code>writeWebGL</code> - <code>rgl</code> function that allows you to write to webGL</li>
+</ul>
+</div>
+<div id="how-do-i-do-this-in-r---example" class="slide section level2">
+<h1>How do I do this in <code>R</code>? - Example</h1>
+<pre class="sourceCode r"><code class="sourceCode r">tmp &lt;-<span class="st"> </span><span class="kw">readNIfTI</span>(<span class="kw">file.path</span>(datadir, <span class="st">&quot;MNI152_T1_2mm_brain.nii&quot;</span>), <span class="dt">reorient=</span><span class="ot">FALSE</span>)
+
+<span class="kw">contour3d</span>(template, <span class="dt">x=</span><span class="dv">1</span>:<span class="kw">dim</span>(temp)[<span class="dv">1</span>], <span class="dt">y=</span><span class="dv">1</span>:<span class="kw">dim</span>(temp)[<span class="dv">2</span>], <span class="dt">z=</span><span class="dv">1</span>:<span class="kw">dim</span>(temp)[<span class="dv">3</span>], <span class="dt">level =</span> <span class="dv">3500</span>, <span class="dt">alpha =</span> <span class="fl">0.15</span>)
+
+<span class="kw">writeWebGL_split</span>(<span class="dt">dir=</span><span class="kw">file.path</span>(outdir, <span class="st">&quot;webGL&quot;</span>), <span class="dt">width=</span><span class="dv">700</span>, <span class="dt">height=</span><span class="dv">500</span>, <span class="dt">template=</span> <span class="kw">file.path</span>(outdir, <span class="st">&quot;my_template.html&quot;</span>))</code></pre>
+</div>
+<div id="wheres-my-4d" class="slide section level2">
+<h1>Where's my 4D?</h1>
+<ul>
+<li>Currently 4D is not implemented in <code>rgl</code></li>
+<li>Can export multiple figures and switch</li>
+<li>Doesn't hold camera angle</li>
+<li>Current work</li>
+</ul>
+</div>
+<div id="dti-example" class="slide section level2">
+<h1>DTI Example</h1>
+<object data="./WebGL/index_dti.html" width="800" height="600"> <embed src="./WebGL/index_dti.html" width="800" height="600"> </embed> 
+Error: Embedded data could not be displayed.
+</object>
+
+</div>
+<div id="why-use-this-for-exploratory-data-analysis-eda-quality-checking-qc" class="slide section level2">
+<h1>Why use this for Exploratory Data Analysis (EDA)/ Quality Checking (QC)</h1>
+<ul>
+<li>Respects true nature of data (brains are not slices!)</li>
+<li>Can get more of an overview</li>
+<li>Motion - can look and interact to see if there are problems</li>
+<li>Some things become more apparent in 3D</li>
+</ul>
+</div>
+<div id="things-hiding-in-2d" class="slide section level2">
+<h1>Things Hiding in 2D</h1>
+<ul>
+<li><p>Real Life Example:</p></li>
+<li>SubLIME is a MS lesion detection algorithm [(Sweeney, Shinohara, Shea, et al., 2012)].<br /></li>
+<li>MS - SUBLIME</li>
+<li><p>before 3D rendering - didn't notice misregistration</p></li>
+</ul>
+</div>
+<div id="rgl-caveats" class="slide section level2">
+<h1>RGL Caveats</h1>
+<p>So RGL rendering is perfect, right?</p>
+<p><img src="html_screenshot.png" height="400" alt="Lot of code"></p>
+</div>
+<div id="rgl-caveats-1" class="slide section level2">
+<h1>RGL Caveats</h1>
+<ul>
+<li>Size of gzipped NIfTI file : 418Kb, unzipped 4Mb</li>
+<li>Size of html output : 30Mb<br /></li>
+<li>WebGL can only hold 65535 points in an object - need to break up</li>
+<li>http://biostat.jhsph.edu/~jmuschel/code/WebGL_Example.zip has example of how to do this (thanks to Duncan Murdoch)</li>
+<li>Also hard to see what's going on in the html</li>
+</ul>
+</div>
+<div id="markdown---use-r" class="slide section level2">
+<h1>Markdown - Use <code>R</code>!</h1>
+<ul>
+<li>Integration into <code>knitr</code> is working - webgl hook</li>
+<li>Exporting the html first, then embedding in html works fine</li>
+<li>RStudio's default doesn't open md's over 2Mb (brain was 30Mb)</li>
+<li><code>shiny</code> integration is possible, but slow depending on system</li>
+<li><p>Meta-Interactive? Interactive control over interactive graphics</p></li>
+<li><p><code>slidify</code> works with it (used in this presentation)</p></li>
+</ul>
+</div>
+<div id="conclusion" class="slide section level2">
+<h1>Conclusion</h1>
+<ul>
+<li>Currently - very good for internal reports/EDA</li>
+<li>Can integrate into new knitting tools</li>
+<li>Not accepted as figures in publication in</li>
+<li>Need journals that can handle</li>
+<li>You can still include standard figures in text with supplemental material</li>
+<li>Available methods allow for reproducibility</li>
+</ul>
+</div>
+<div id="thanks" class="slide section level2">
+<h1>Thanks</h1>
+<ul>
+<li>Ciprian Craniceanu and Brian Caffo - SMART Group</li>
+<li>Elizabeth Sweeney</li>
+<li>Duncan Murdoch - otherwise I'd still be presenting distorted brains</li>
+</ul>
+</div>
+<div id="biblio" class="slide section level2">
+<h1>Biblio</h1>
+</div>
+<div id="whhat" class="slide section level2">
+<h1>WHhat</h1>
+<p>Here are the steps. Need a structure 4D - over time or multiple ROIs</p>
+</div>
+<div id="slide-1" class="slide section level2">
+<h1>Slide 1</h1>
+<p>Functional brain imaging (e.g. fMRI, PET, EEG) data is a 4-dimensional time series representing changes in brain activity over time.</p>
+<p>Structrual imaging (e.g. MPRAGE, DTI, CT) also has been increasingly more common to have a longitudinal component, where participants/subjects are scanned multiple times.</p>
+<p>Visualization and presentation of these data can be improved with the use of 3D tools.</p>
+<p>NEEDED: pictures of brains - a lot - DTI ex, MRI</p>
+</div>
+</body>
+</html>

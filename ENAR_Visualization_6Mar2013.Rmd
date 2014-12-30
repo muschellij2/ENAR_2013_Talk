@@ -28,7 +28,7 @@ library(knitcitations)
 library(slidify)
 library(dti)
 library(plotrix)
-rootdir <- "/Users/muschellij2/Dropbox/3DPDF_Example"
+rootdir <- path.expand("~/Dropbox/3DPDF_Example")
 outdir <- file.path(rootdir, "Presentation")
 homedir <- file.path(rootdir, "Paper")
 datadir <- file.path(homedir, "data")
@@ -72,9 +72,6 @@ ctr <- as.numeric(apply(x, 2, function(col) names(which.max(table(col)))))
 
 ```
 
-<!---
-<object data="./WebGL/index.html" width="600" height="400"> <embed src="./WebGL/index.html" width="600" height="400"> </embed> Error: Embedded data could not be displayed. </object>
--->
 
 ## R programs used for this presentation
 
@@ -250,7 +247,7 @@ The same data presented in a 3D model, using **misc3d** and **rgl**
 ---
 
 
-```{r dti-example, cache=FALSE}
+```{r dti-example, cache=TRUE}
 # path2cibc <- file.path(outdir, "brain-dt/")
 # 
 # # read function for NRRD-files
@@ -410,7 +407,7 @@ Thumbnails of clearance from Natalie
 
 <object data="./WebGL/index_dti.html" width="800" height="600"> <embed src="./WebGL/index_dti.html" width="800" height="600"> </embed> Error: Embedded data could not be displayed. </object>
 
-----
+---
 
 ## RGL - Use R!
 
@@ -539,7 +536,7 @@ So RGL rendering is perfect, right
 ---
 
 ## Biblio
-```{r biblio, results='asis'}
+```{r biblio, results='asis', eval=FALSE}
 bibliography("html") 
 ```
 ---
@@ -563,5 +560,3 @@ Visualization and presentation of these data can be improved with the use of 3D 
 
 
 NEEDED: pictures of brains - a lot - DTI ex, MRI
-
----

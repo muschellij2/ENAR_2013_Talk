@@ -28,7 +28,8 @@ library(knitcitations)
 library(slidify)
 library(dti)
 library(plotrix)
-rootdir <- "/Users/muschellij2/Dropbox/3DPDF_Example"
+library(oro.nifti)
+rootdir <- path.expand("~/Dropbox/3DPDF_Example")
 outdir <- file.path(rootdir, "Presentation")
 homedir <- file.path(rootdir, "Paper")
 datadir <- file.path(homedir, "data")
@@ -52,7 +53,7 @@ ctr <- as.numeric(apply(x, 2, function(col) names(which.max(table(col)))))
 
 
 
-```{r testgl}
+```{r testgl, echo = FALSE}
 ### Template from MNI152 from FSL
 
 
@@ -87,7 +88,7 @@ ctr <- as.numeric(apply(x, 2, function(col) names(which.max(table(col)))))
 
 
 ## 3D Graphics?
-```{r hist3d}
+```{r hist3d, echo=FALSE}
 ##########
 ### 3D HIST EXAMPLE:
 ### Taken from system.file("demo", "hist3d.R", package="rgl")
@@ -215,7 +216,7 @@ Visualization and presentation of these data can be <b>improved</b> with the use
 
 Using image.nifti from `oro.nifti`  [`r citet(bib["oro.nifti"])`] package:
 
-```{r lightbox, dev='png', fig.height=5, fig.width=10, warning=FALSE, cache=TRUE}
+```{r lightbox, dev='png', fig.height=5, fig.width=10, warning=FALSE, echo = FALSE, cache=TRUE}
 have_info <- which(!apply(tmp, 3, function(x) any(x > 0)))
 mid <- dim(tmp)[3]/2
 have_info <- have_info[have_info > mid]
@@ -230,7 +231,7 @@ image.nifti(nifti(x))
 * Look at data by slice over time 
   * Need to line up images so time 1 and time 2 are the same (registration) - applies to most temporal analysis
 
-```{r lightbox2, dev='png', fig.height=5, fig.width=10, warning=FALSE, cache=TRUE}
+```{r lightbox2, echo = FALSE, dev='png', fig.height=5, fig.width=10, warning=FALSE, cache=TRUE}
 slice95 <- readNIfTI(file.path(datadir, "Slice95.nii.gz"), reorient=FALSE)
 image.nifti(slice95)
 ```
@@ -240,7 +241,7 @@ image.nifti(slice95)
 Overall, most methods keep temporal or 2D spatial components fixed and vary the other. 
 Using orthographic from `oro.nifti` package:
 
-```{r ortho, dev='png', warning=FALSE, cache=TRUE}
+```{r ortho, echo = FALSE, dev='png', warning=FALSE, cache=TRUE}
 orthographic(template, col=c(gray(0:61/64), hotmetal(3)), xyz=c(60, 85, 35), text="Example of activation map", text.cex=2)
 ```
 
@@ -377,7 +378,7 @@ writeWebGL_split(dir=file.path(outdir, "webGL"), width=700, height=500, template
 
 
 
-```{r dti-example, cache=FALSE}
+```{r dti-example, cache=FALSE, echo = FALSE}
 # path2cibc <- file.path(outdir, "brain-dt/")
 # 
 # # read function for NRRD-files
@@ -554,7 +555,7 @@ So RGL rendering is perfect, right?
 ---
 
 ## Biblio
-```{r biblio, results='asis'}
+```{r biblio, results='asis', eval=FALSE, echo = FALSE}
 bibliography("html") 
 ```
 ---
@@ -578,5 +579,3 @@ Visualization and presentation of these data can be improved with the use of 3D 
 
 
 NEEDED: pictures of brains - a lot - DTI ex, MRI
-
----
